@@ -1,0 +1,53 @@
+import Vue from 'vue';
+import Router from 'vue-router';
+import Welcome from '@/components/Welcome';
+import TabScreen from '@/components/TabScreen';
+import QuestionView from '@/components/QuestionView';
+import AnswerView from '@/components/AnswerView';
+import ProfileView from '@/components/ProfileView';
+import GiveAnswer from '@/components/GiveAnswer';
+import ReadAnswer from '@/components/ReadAnswer';
+
+Vue.use(Router);
+
+export default new Router({  
+    routes: [
+    {
+      path:'/login',
+      name:'login',
+      component: Welcome
+    },
+    {
+      path:'/',
+      name:'main',
+      component: TabScreen,
+      children: [
+        {
+          path: 'q',
+          component: QuestionView,
+        },
+        {
+          path: 'a',
+          component: AnswerView,
+        },
+        {
+          path: 'p',
+          component: ProfileView
+        },
+        {
+          name:'writeanswer',
+          path:'aw',
+          component: GiveAnswer,
+          props: true
+          },
+          {
+            name:'readanswer',
+            path:'re',
+            component: ReadAnswer,
+            props: true
+          }
+      ]
+
+    
+    },
+  ]})
