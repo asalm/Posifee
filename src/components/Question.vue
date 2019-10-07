@@ -96,16 +96,18 @@ console.log('i will write an answer!');
 
 @media only screen and (min-width:600px){
 .notification{
-    box-shadow:0px 4px 8px 1px rgba(0,0,0,0.3);
+    box-shadow:0px 6px 8px 1px rgba(0,0,0,0.28);
     max-width:70%;
     margin:0 auto;
     transition:all 0.8s;
+    background-color:white;
 }
 @media screen and (max-width:599px){
     .notification{
         max-width:92%;
         margin:0 auto;
-        transition: all 0.8s
+        transition: all 0.8s;
+        background-color:white;
     }
 }
 }

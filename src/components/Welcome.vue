@@ -6,18 +6,25 @@
             <h1 class="title"><b>posi</b>fee</h1>
             <h3 class="subtitle"><i>"das etwas andere soziale Netzwerk"</i></h3>
         </div>
-        <div class="columns join-row">
-            <div class="column is-9">
-                <router-link to="/q">
-                    <b-button type="is-success" size="is-large">
-                        Beitreten
+        <div class="columns join-row is-centered">
+            <!--
+            <div class="column is-12">
+                <h4 class="subtitle">Nehm teil!</h4>
+                <p class="has-text-left">Posifee funktioniert ohne Nutzeranmeldungen. Dein Profil wird anhand deines Browsercache ermittelt und verfällt, sobald dieser geleert wird.</p>
+            </div>-->
+            <div class="column is-12">
+                <div class="buttons">
+                        <b-button 
+                            tag="router-link" 
+                            to="/q" 
+                            type="is-light" 
+                            size="is-large">
+                            Beitreten
+                        </b-button>
+                    <b-button type="is-light" size="is-large" @click="toggleInfoModal">
+                        info
                     </b-button>
-                </router-link>
-            </div>
-            <div class="column is-1">
-                <b-button type="is-info" size="is-large" outlined @click="toggleInfoModal">
-                    info
-                </b-button>
+                </div>
             </div>
         </div>
         <div class="column info-row">
@@ -66,7 +73,9 @@ export default {
     height:100vh;
     background-image: linear-gradient(336deg, rgb(216,216,216),rgb(255,255,255));
 }
-
+h4.subtitle{
+    font-size:3.2em;
+}
 .title{
     font-size:8em;
     text-shadow: 0px 2px rgba(0,0,0,0.3);
@@ -78,10 +87,14 @@ export default {
 .join-row{
     margin-left:auto;
     margin-right:auto;
-    width:14em;
-    margin-top:12em;
-    position:relative;}
-.info-row{
+    max-width:18em;
+    background-color: hsl(141, 71%, 48%);
+    border-radius:1.2em;
+    margin-top:6em;
+    position:relative;
+    padding:1.3em 1.3em;
+}
+.info-row{    
     bottom:0;
     position:relative;
     margin-top:16em;}

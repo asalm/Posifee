@@ -1,19 +1,19 @@
 <template>
 <div class="container app">
     <section>
-        <nav class="navbar is-fixed-bottom level is-mobile">
-            <div class="level-item has-text-centered">
+        <nav class="navbar is-fixed-bottom level is-mobile"><!-- class="is-fixed-bottom"-->
+            <div class="level-item has-text-centered has-text-light">
                     <router-link to="/q">Fragen</router-link>
                 </div>
-                <div class="level-item has-text-centered">
+                <div class="level-item has-text-centered has-text-light">
                     <router-link to="/a">Antworten</router-link>
                 </div>
-                <div class="level-item has-text-centered">
+                <div class="level-item has-text-centered has-text-light">
                     <router-link to="/p">Profil</router-link>
                 </div>
         </nav>
     </section>
-    <section style="margin-bottom:6em" class="has-text-dark">
+    <section style="margin-bottom:6em" class="has-text-dark list">
         <transition name="slide-fade">
             <router-view></router-view>
         </transition>
@@ -39,18 +39,45 @@ nav.tabs.is-toggle.is-fullwith {
 li{
     margin-left:2px;
 }
-.app{
-    height:100vh;
+.container{
+    overflow:hidden;
 }
+@media only screen and (max-height:899px){
+    .list{
+        transform:translateY(6em);
+    }
+    .app{
+        min-height:52em;
+    }
+}
+@media only screen and (min-height:900px){
 
+    .list{
+        transform:translateY(8em);
+        border-radius:0.6em;
+        border-left: 2px solid rgba(0,0,0,0.1);
+        border-right: 2px solid rgba(0,0,0,0.1);
+        background-image: linear-gradient(336deg, rgb(216,216,216),rgb(255,255,255));
+        padding-bottom:4em;
+    }
+    .app{
+        min-height:58em;
+    }
+
+}
+.app{
+    max-width:36em;
+    max-height:58em;
+}
 .body {
+    overflow-y:hidden;
     margin-top:3em;
     display:flex;
     align-items:center;
 
 }
 b-tabs{
-    transform:translateY(4em);
+    /*transform:translateY(4em);*/
     z-index:4444;
     background-color:white;
     border-left: 2px solid rgba(0,0,0,0.1);
@@ -58,7 +85,13 @@ b-tabs{
     border-top: 2px solid rgba(0,0,0,0.1);
     box-shadow: 15px 0px 16px 16px rgba(3,3,3,0.1);
 }
-
+.navbar{
+    box-shadow:0px -2px 8px rgba(3,3,3,0.3);
+background-color:rgb(255, 255, 255);
+    max-width:36em;
+    margin-left:auto;
+    margin-right:auto;
+}
 b-tab-item{
 border-left:1px solid gray;
 border-right:1px solid gray;

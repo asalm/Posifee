@@ -5,6 +5,7 @@ import VueApexCharts from 'vue-apexcharts';
 import VueModalTor from 'vue-modaltor';
 import VDragged from 'v-dragged';
 import UniqueId from 'vue-unique-id';
+import vuescroll from 'vuescroll';
 import router from './router';
 
 import './../node_modules/bulma/css/bulma.css';
@@ -22,6 +23,12 @@ Vue.component('font-awesome-icon', FontAwesomeIcon);
 Vue.component('apexchart', VueApexCharts);
 Vue.config.productionTip = false
 
+Vue.use(vuescroll, {
+  ops: {
+    // The global config
+  },
+  name: 'myScroll' // customize component name, default -> vueScroll
+});
 Vue.use(Buefy);
 Vue.use(VueModalTor);
 Vue.use(VDragged);
