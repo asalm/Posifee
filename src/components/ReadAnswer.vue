@@ -79,7 +79,7 @@ export default {
 }
 .title{
   z-index:4;
-  padding-top:1em;
+  padding-top:0.56em;
     text-shadow: 0px 2px rgba(0,0,0,0.3);
     font-weight:200;
     

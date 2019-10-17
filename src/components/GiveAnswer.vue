@@ -6,6 +6,7 @@
         </b-button> 
     </div>
 <div class="qContainer">
+    <vuescroll>
         <div class="container" style="margin-bottom:3em">
             <h1 class="title">Frage:</h1>
             <div class="notification is-warning">
@@ -17,19 +18,21 @@
             <b-field>
             <b-input type="textarea"
                 minlength="10"
-                maxlength="100"
+                maxlength="500"
                 placeholder="Maxlength automatically counts characters">
             </b-input>
             </b-field>
         </div>
-        <div class="container">
+        <div class="container" style="margin-bottom:2em">
             <b-button>Abschicken</b-button>
         </div>
+    </vuescroll>
 </div>
 </div>
 </template>
 <script>
-import Question from '@/components/Question'
+import Question from '@/components/Question';
+import vuescroll from 'vuescroll';
 
 export default {
     name:'giveanswer',
@@ -37,7 +40,8 @@ export default {
         question:String
     },
     components:{
-        Question
+        Question,
+        vuescroll
     },
     methods:{
         back: function(){
@@ -72,7 +76,7 @@ export default {
 }
 .title{
   z-index:4;
-  padding-top:1em;
+  padding-top:0.56em;
     text-shadow: 0px 2px rgba(0,0,0,0.3);
     font-weight:200;
     

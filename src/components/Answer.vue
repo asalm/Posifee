@@ -30,17 +30,17 @@ export default {
                 clientY = 0;
                 return
             }
-            if(offsetY > 0 || offsetY < 0){
+            if(offsetY > 160 || offsetY < 160){
                 document.getElementById(this.id).classList.remove("is-success");
                 document.getElementById(this.id).classList.remove("is-danger");
             }
             //var l = +window.getComputedStyle(el)['left'].slice(0, -2) || 0
             //var t = +window.getComputedStyle(el)['top'].slice(0, -2) || 0
-            if(offsetX > 100){
+            if(offsetX > 240){
                 document.getElementById(this.id).classList.add('is-success');
                 document.getElementById(this.id).classList.remove("is-danger");
                 console.log("CONTAINER",this.id + "pulled Right { cX: " + clientX + ";; oX: " + offsetX)
-            }else if(offsetX < -100){
+            }else if(offsetX < -240){
                 console.log("CONTAINER",this.id + "pulled Left")
 
                 document.getElementById(this.id).classList.add('is-danger');
@@ -79,7 +79,13 @@ export default {
     margin:0 auto;
     transition:all 0.8s;
 }
-
+@media screen and (max-width:599px){
+    .notification{
+        max-width:92%;
+        margin:0 auto;
+        transition: all 0.8s;
+    }
+}
 .notification:hover{
     box-shadow:0px 3px 9px 2px rgba(0,0,0,0.3);
     transition: all 0.8s;

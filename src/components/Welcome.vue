@@ -118,5 +118,9 @@ i{
 b{
     font-weight:200;
     color:hsl(141, 71%, 48%);}
+
+a.button{
+    color:black !important;
+}
 </style>
 

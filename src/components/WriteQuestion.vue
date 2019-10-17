@@ -15,7 +15,7 @@
             <b-field>
             <b-input type="textarea"
                 minlength="10"
-                maxlength="100"
+                maxlength="500"
                 placeholder="Maxlength automatically counts characters">
             </b-input>
             </b-field>

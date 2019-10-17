@@ -65,14 +65,20 @@ user-select: none;
   overflow:hidden;
   color:hsl(7, 71%, 48%);
   z-index:2;
-  opacity:32%;
+  opacity:0.32;
+  filter: alpha(opacity=32);
+  zoom:1;
   font-size:46em;
   transform:translate(385px, -200px);
   pointer-events:none;
     /*transform:translateY(-500px);*/
 
 }
-
+@media screen and (max-width:599px){
+  .bg-graphic{
+    transform:translate(235px,-200px);
+  }
+}
 .title{
   z-index:4;
   padding-top:4em;

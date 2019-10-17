@@ -23,6 +23,10 @@ export default {
   color: #2c3e50;
   overflow-y:hidden;
 }
+
+span {
+  color:#363636;
+}
 </style>
 
 

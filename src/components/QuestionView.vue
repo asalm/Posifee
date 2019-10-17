@@ -55,7 +55,7 @@ export default {
         {text: "noch ne frage, weil wegen testen"},        {text: "ehm, hallo?! is hirr wea?"},
         {text: "noch ne frage, weil wegen testen"},        {text: "ehm, hallo?! is hirr wea?"},
         {text: "noch ne frage, weil wegen testen"},
-        {text: "i bims no 1 frage, aber dismal mit viel mehr text, damit ich kann gucken ob das macht ein schnitt oder nischt"}
+        {text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi vel ex quis tortor eleifend auctor vitae et nulla. Nulla eu tempor dui, a efficitur massa. Nam ullamcorper arcu quis dolor congue, quis tristique justo ornare. Morbi commodo nulla luctus, pulvinar orci eu, sagittis augue. Maecenas fringilla enim ut orci efficitur, vitae iaculis tortor ullamcorper. Proin suscipit bibendum rhoncus. Nam felis erat, accumsan rhoncus nibh sit amet, consequat blandit tellus. Suspendisse sit amet sem metus. "}
       ]
     }
   },
@@ -86,14 +86,20 @@ user-select: none;
   overflow:hidden;
   color:hsl(141, 71%, 48%);
   z-index:2;
-  opacity:32%;
+  opacity:0.32;
+  filter: alpha(opacity=32);
+  zoom:1;
   font-size:46em;
   transform:translate(285px, -200px);
   pointer-events:none;
     /*transform:translateY(-500px);*/
 
 }
-
+@media screen and (max-width:599px){
+  .bg-graphic{
+    transform:translate(200px,-200px);
+  }
+}
 .level{
   margin-top:3em;
   padding-left:5em;
