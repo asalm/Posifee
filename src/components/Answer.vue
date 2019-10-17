@@ -2,7 +2,7 @@
 <div class="container" v-dragged="onDragged">
     <!-- Swipe Right for Positive Vote -->
     <!-- Swipe Left for Negative Vote -->
-    <div  class="notification" :id="id">
+    <div v-on:dblclick="reset()" class="notification" :id="id">
     <p>{{ text }}</p>
     </div>
 </div>    
@@ -13,6 +13,12 @@ export default {
     props: {
         text: String,
         id: String,
+    },
+    data: function(){
+        return {
+            positive: false,
+            negative: false,
+        }
     },
     methods: {
         onDragged({ el, deltaX, deltaY, offsetX, offsetY, clientX, clientY, first, last }) {
@@ -30,22 +36,18 @@ export default {
                 clientY = 0;
                 return
             }
-            if(offsetY > 160 || offsetY < 160){
-                document.getElementById(this.id).classList.remove("is-success");
-                document.getElementById(this.id).classList.remove("is-danger");
-            }
-            //var l = +window.getComputedStyle(el)['left'].slice(0, -2) || 0
-            //var t = +window.getComputedStyle(el)['top'].slice(0, -2) || 0
+
+            //Handle Swipe Upvote
             if(offsetX > 240){
-                document.getElementById(this.id).classList.add('is-success');
-                document.getElementById(this.id).classList.remove("is-danger");
                 console.log("CONTAINER",this.id + "pulled Right { cX: " + clientX + ";; oX: " + offsetX)
+                this.upvote();
+
+            //Handle Swipe Downvote
             }else if(offsetX < -240){
                 console.log("CONTAINER",this.id + "pulled Left")
-
-                document.getElementById(this.id).classList.add('is-danger');
-                document.getElementById(this.id).classList.remove("is-success");
+                this.downvote();
             }
+
                 deltaX = 0;
                 deltaY = 0;
                 offsetX = 0;
@@ -54,9 +56,34 @@ export default {
                 clientY = 0;
                 this.dragged = false;
             
+            },
+
+            upvote(){
+                this.$data.negative = false;
+                this.$data.positive = true;
+            },
+            downvote(){
+                this.$data.negative = true;
+                this.$data.positive = false;
+            },
+            reset(){
+                this.$data.negative = false;
+                this.$data.positive = false;
+                document.getElementById(this.id).classList.remove("is-success");
+                document.getElementById(this.id).classList.remove("is-danger");
             }
            
 
+        },
+        watch: {
+            positive: function(){
+                document.getElementById(this.id).classList.add('is-success');
+                document.getElementById(this.id).classList.remove("is-danger");
+            },
+            negative: function(){
+                document.getElementById(this.id).classList.add('is-danger');
+                document.getElementById(this.id).classList.remove("is-success");
+            }
         }
 }
 </script>
