@@ -14,9 +14,7 @@
         </nav>
     </section>
     <section style="margin-bottom:6em" class="has-text-dark list">
-        <transition name="slide-fade">
             <router-view></router-view>
-        </transition>
     </section>
 </div>
 </template>
@@ -44,7 +42,7 @@ li{
 }
 @media only screen and (max-height:899px){
     .list{
-        transform:translateY(6em);
+        transform:translateY(0em);
     }
     .app{
         min-height:52em;
@@ -53,7 +51,7 @@ li{
 @media only screen and (min-height:900px){
 
     .list{
-        transform:translateY(8em);
+        transform:translateY(4em);
         border-radius:0.6em;
         border-left: 2px solid rgba(0,0,0,0.1);
         border-right: 2px solid rgba(0,0,0,0.1);

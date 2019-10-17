@@ -7,13 +7,11 @@
     </div>
 <div class="qContainer">
         <div class="container" style="margin-bottom:3em">
-            <h1 class="title">Frage:</h1>
-            <div class="notification is-warning">
-            <p>{{ question }}</p>
-            </div>
+            <h1 class="title">Frag etwas!</h1>
+            <p>Stell eine Frage an die Community! Nur du kannst die Antworten dieser Frage lesen.</p>
         </div>
         <div class="container" style="margin-bottom:2em">
-            <h1 class="title">Deine Antwort:</h1>
+            <h1 class="title">Deine Frage:</h1>
             <b-field>
             <b-input type="textarea"
                 minlength="10"
@@ -29,15 +27,11 @@
 </div>
 </template>
 <script>
-import Question from '@/components/Question'
 
 export default {
-    name:'giveanswer',
+    name:'writequestion',
     props:{
         question:String
-    },
-    components:{
-        Question
     },
     methods:{
         back: function(){
@@ -72,7 +66,7 @@ export default {
 }
 .title{
   z-index:4;
-  padding-top:1em;
+  padding-top:0.56em;
     text-shadow: 0px 2px rgba(0,0,0,0.3);
     font-weight:200;
     

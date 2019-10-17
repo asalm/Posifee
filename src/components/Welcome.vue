@@ -76,10 +76,23 @@ export default {
 h4.subtitle{
     font-size:3.2em;
 }
-.title{
+@media screen and (min-width:1200px){
+    .title{
     font-size:8em;
     text-shadow: 0px 2px rgba(0,0,0,0.3);
     font-weight:200;}
+
+    .join-row{
+        padding:1.3em 1.3em;
+        background-color: hsl(141, 71%, 48%);
+
+    }
+}
+.title{
+    font-size:4em;
+    text-shadow: 0px 2px rgba(0,0,0,0.3);
+    font-weight:200;
+}
 
 .title-row{
     margin-top:8em;
@@ -88,11 +101,12 @@ h4.subtitle{
     margin-left:auto;
     margin-right:auto;
     max-width:18em;
-    background-color: hsl(141, 71%, 48%);
+    /*background-color: rgba(255,255,255,0.3);*/
     border-radius:1.2em;
     margin-top:6em;
     position:relative;
-    padding:1.3em 1.3em;
+    padding-left:1em;
+    padding:auto 0.3em;
 }
 .info-row{    
     bottom:0;

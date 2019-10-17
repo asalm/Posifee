@@ -7,6 +7,7 @@ import AnswerView from '@/components/AnswerView';
 import ProfileView from '@/components/ProfileView';
 import GiveAnswer from '@/components/GiveAnswer';
 import ReadAnswer from '@/components/ReadAnswer';
+import WriteQuestion from '@/components/WriteQuestion';
 
 Vue.use(Router);
 
@@ -45,6 +46,11 @@ export default new Router({
             path:'re',
             component: ReadAnswer,
             props: true
+          },
+          {
+            name:'writequestion',
+            path:'new',
+            component: WriteQuestion
           }
       ]
 

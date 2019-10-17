@@ -7,41 +7,15 @@
         <font-awesome-icon v-else icon="reply"/></button>
 
     </div>
-    <!--
-    <vue-modaltor  
-        :visible="open" 
-        @hide="hideModal"
-        :bg-overlay="'white'"
-        :bg-panel="'white'">
-    <h1 class="title">Frage:</h1>
-    <div class="notification is-warning">
-        <p>{{ text }}</p>
-    </div>
-     Replace with Separator Element 
-    <p>----------------------</p>
-     Replace with Separator Element 
-    <h1 class="title">Antworten</h1>
-
-    <Answer :id="$id('a1')" text="fünününününün" />
-    <Answer :id="$id('a2')" text="füfüfüfüf" />
-    <Answer :id="$id('a3')" text="fünününününün" />
-    <Answer :id="$id('a4')" text="    <Answer text='fünününününün'" />
-    <Answer :id="$id('a5')" text="Die USA drohen der EU mit Konsequenzen, sollte dies" />
-    <Answer :id="$id('a6')" text="Eliten, Bürokraten, Migranten: Europas Rechte haben gemeinsame Gegner. Am liebsten würden AfD, Lega und Co. die EU von innen umkrempeln. Doch einer echten Allianz stehen gravierende Unterschiede im Weg. " />
-    <Answer :id="$id('a7')" text="Die Rolle des Verteidigungsministeriums bei der Sanierung der 'Gorch Fock' hat womöglich ein juristisches Nachspiel. Nach SPIEGEL-Informationen geht es um ein Papier, das Ursula von der Leyen abgezeichnet hat" />
-
-  </vue-modaltor>
-  -->
+    
 </div>
 </template>
 <script>
-//import Answer from '../components/Answer.vue';
-//const router = this.$router
+
 
 export default {
     name:'question',
     components:{
-        //Answer
     },
     props: {
         text: String,
