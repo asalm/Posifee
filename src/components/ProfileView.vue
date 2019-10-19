@@ -18,7 +18,10 @@
             </div>
             <div class="column is-6">
                 <VueApexCharts type=radialBar height=300 :options="chartOptions" :series="series" />
-
+            </div>
+            <div class="column is-12">
+                <h1 class="title">Meine Fragen:</h1>
+                
             </div>
         </div>
     </vuescroll>
