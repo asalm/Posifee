@@ -37,26 +37,12 @@ Vue.use(UniqueId);
 //Default Routing to Login!
 router.replace('/login');
 
-
-var url = new URL(window.location.href);
-//var usr_tkn = url.searchParams.get("token");
-/*
-new Vue({
-  router,
-  render: h => h(App)
-}).$mount('#app');
-*/
-
 initVue();
-
-
 
 async function initVue() {
   await initScript().then(async function(r) {
-    //var api = r;
-
     Vue.prototype.$api = r;
-    Vue.prototype.$apptkn = "ae46dd6cae25683f56985cc96b626cd81664cc76cf9be33975866e587a016603181d1604513edacab5bbe5db0fbf5cb906a911c09076e253aa794073e8ffc4ed";
+    Vue.prototype.$tkn = "ae46dd6cae25683f56985cc96b626cd81664cc76cf9be33975866e587a016603181d1604513edacab5bbe5db0fbf5cb906a911c09076e253aa794073e8ffc4ed"
 
     new Vue({
       router,
@@ -77,6 +63,7 @@ function initScript(){
       "app_token": "ae46dd6cae25683f56985cc96b626cd81664cc76cf9be33975866e587a016603181d1604513edacab5bbe5db0fbf5cb906a911c09076e253aa794073e8ffc4ed",
       "schemaName": "posi"
     };
+    // eslint-disable-next-line no-undef
     var _r = new Router_func(config);
     try{
     await _r.setup();

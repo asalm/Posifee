@@ -16,7 +16,8 @@
         <div class="container" style="margin-bottom:2em">
             <h1 class="title">Deine Antwort:</h1>
             <b-field>
-            <b-input type="textarea"
+            <b-input v-if="!submitted" type="textarea"
+                v-model="inputText"
                 minlength="10"
                 maxlength="500"
                 placeholder="Maxlength automatically counts characters">
@@ -24,7 +25,8 @@
             </b-field>
         </div>
         <div class="container" style="margin-bottom:2em">
-            <b-button>Abschicken</b-button>
+            <b-button v-if="!submitted" v-on:click="submit()">Abschicken</b-button>
+            <b-button v-else v-on:click="back()">Zurück</b-button>
         </div>
     </vuescroll>
 </div>
@@ -37,17 +39,44 @@ import vuescroll from 'vuescroll';
 export default {
     name:'giveanswer',
     props:{
+        qid:Number,
         question:String
     },
     components:{
         Question,
         vuescroll
     },
+    data(){
+        return{
+            inputText:"",
+            submitted: false,
+        }
+    },
     methods:{
         back: function(){
             const self = this
 
             self.$router.go(-1);
+        },
+        submit: async function(){
+            console.log("ANSWERING TO: ",this.$props.qid);
+            var submission = await this.$api.db.answer.insert({
+                "qID":this.$props.qid,
+                "userID":this.$api.usr.id,
+                "text": this.inputText,
+                "positive":false,
+                "negative":false
+            },this.$tkn);
+            
+            if(submission.response === "transmission accepted"){
+                this.submitted = true;
+            }
+        }
+    },
+    watch: {
+        inputText: function(){
+            //es-disable next-line
+            console.log(this.inputText);
         }
     }
 }

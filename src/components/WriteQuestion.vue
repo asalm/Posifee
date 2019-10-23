@@ -12,32 +12,59 @@
         </div>
         <div class="container" style="margin-bottom:2em">
             <h1 class="title">Deine Frage:</h1>
-            <b-field>
+            <b-field v-if="!submitted">
             <b-input type="textarea"
+                v-model="inputText"
                 minlength="10"
                 maxlength="500"
                 placeholder="Maxlength automatically counts characters">
             </b-input>
             </b-field>
+            <div v-else class="column">
+                <Question :text="this.inputText"/>
+            </div>
         </div>
         <div class="container">
-            <b-button>Abschicken</b-button>
+            <b-button v-if="!submitted" v-on:click="submit()">Abschicken</b-button>
+            <b-button v-else v-on:click="back()">Zurück</b-button>
         </div>
 </div>
 </div>
 </template>
 <script>
-
+import Question from '../components/Question.vue'
 export default {
     name:'writequestion',
+    components:{
+        Question,
+    },
     props:{
-        question:String
+    },
+    data(){
+        return{
+            inputText: "",
+            submitted: false
+        }
     },
     methods:{
         back: function(){
             const self = this
 
             self.$router.go(-1);
+        },
+        submit: async function(){
+            var submission = await this.$api.db.question.insert({
+                "userID": parseInt(this.$api.usr.id),
+                "text": this.inputText
+            }, this.$tkn)
+
+            if(submission.response === "transmission accepted"){
+                this.submitted = true;
+            }
+        }
+    },
+    watch: {
+        inputText: function(){
         }
     }
 }

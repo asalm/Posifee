@@ -16,13 +16,7 @@
         <h1 class="title">Antworten:</h1>
         <vuescroll>
         <div class="AWScontainer" style="margin-bottom:2em">
-            <Answer :id="$id('a1')" text="fünününününün" />
-            <Answer :id="$id('a2')" text="füfüfüfüf" />
-            <Answer :id="$id('a3')" text="fünününününün" />
-            <Answer :id="$id('a4')" text="    <Answer text='fünününününün'" />
-            <Answer :id="$id('a5')" text="Die USA drohen der EU mit Konsequenzen, sollte dies" />
-            <Answer :id="$id('a6')" text="Eliten, Bürokraten, Migranten: Europas Rechte haben gemeinsame Gegner. Am liebsten würden AfD, Lega und Co. die EU von innen umkrempeln. Doch einer echten Allianz stehen gravierende Unterschiede im Weg. " />
-            <Answer :id="$id('a7')" text="Die Rolle des Verteidigungsministeriums bei der Sanierung der 'Gorch Fock' hat womöglich ein juristisches Nachspiel. Nach SPIEGEL-Informationen geht es um ein Papier, das Ursula von der Leyen abgezeichnet hat" />
+            <Answer v-for="a in answers" :key="a.id" :aid="a.aid" :id="$id(a.aid)" :userid="a.userid" :text="a.text" :pos="a.positive" :neg="a.negative" interactive/> 
         </div>
         </vuescroll>
         </div>
@@ -36,17 +30,46 @@ import vuescroll from 'vuescroll';
 export default {
     name:'giveanswer',
     props:{
+        qid:Number,
         question:String
     },
     components:{
         Answer,
         vuescroll
     },
+    data(){
+        return {
+            answers:[],
+            loading:false,
+        }
+    },
+    created(){
+        this.getAnswers();
+    },
     methods:{
         back: function(){
             const self = this
 
             self.$router.go(-1);
+        },
+        getAnswers: async function(){
+            this.loading = true;
+            var _response = await this.$api.db.answer.get({
+                "qid":this.$props.qid
+            },this.$tkn);
+            var a = _response.data;
+            console.log(a[i]);
+            for(var i = 0; i < a.length; i++){
+                        console.log(a[i]);
+                this.answers.push({
+                    "aid":a[i].aid,
+                    "userid":a[i].userid,
+                    "text":a[i].text,
+                    "positive":a[i].positive,
+                    "negative":a[i].negative
+                })
+            }
+ 
         }
     }
 }

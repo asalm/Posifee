@@ -8,16 +8,36 @@
 </div>    
 </template>
 <script>
+import _ from 'lodash';
+
 export default {
     name:'answer',
     props: {
         text: String,
         id: String,
+        aid: Number,
+        userid: Number,
+        pos: Boolean,
+        neg: Boolean,
+        interactive: Boolean
     },
     data: function(){
         return {
             positive: false,
             negative: false,
+        }
+    },
+    created(){
+        var s = this.$props;
+        //eslint-disable-next-line
+        //console.log("im number " + s.aid + " from " + s.userid + ".",s.text,"im"+ s.pos +" and " +s.neg);
+        
+        if(s.pos){
+            console.log
+            this.$data.positive = true;
+        }
+        if(s.neg){
+            this.$data.negative = true;
         }
     },
     methods: {
@@ -36,18 +56,18 @@ export default {
                 clientY = 0;
                 return
             }
-
+        if(this.$props.interactive){
             //Handle Swipe Upvote
             if(offsetX > 240){
-                console.log("CONTAINER",this.id + "pulled Right { cX: " + clientX + ";; oX: " + offsetX)
+                //console.log("CONTAINER",this.id + "pulled Right { cX: " + clientX + ";; oX: " + offsetX)
                 this.upvote();
 
             //Handle Swipe Downvote
             }else if(offsetX < -240){
-                console.log("CONTAINER",this.id + "pulled Left")
-                this.downvote();
+                //console.log("CONTAINER",this.id + "pulled Left")
+               this.downvote();
             }
-
+        }
                 deltaX = 0;
                 deltaY = 0;
                 offsetX = 0;
@@ -58,13 +78,38 @@ export default {
             
             },
 
-            upvote(){
-                this.$data.negative = false;
-                this.$data.positive = true;
+            upvote: async function(){
+                console.log("attemping upvote");
+
+                var _response = await this.$api.db.answer.update({
+                    row:{
+                        "aid": [parseInt(this.$props.aid)]
+                    },
+                    update:{
+                        positive: "true",
+                        negative: "false"
+                    }
+                },this.$tkn);
+                //console.log(_response);
+                if(_response){
+                    this.$data.negative = false;
+                    this.$data.positive = true;
+                }
             },
-            downvote(){
-                this.$data.negative = true;
-                this.$data.positive = false;
+            downvote: async function(){
+                var _response = await this.$api.db.answer.update({
+                    row:{
+                        "aid": [parseInt(this.$props.aid)]
+                    },
+                    update:{
+                        positive:Boolean(false),
+                        negative:Boolean(true)
+                    }
+                },this.$tkn);
+                if(_response.response){
+                    this.$data.negative = true;
+                    this.$data.positive = false;
+                }
             },
             reset(){
                 this.$data.negative = false;

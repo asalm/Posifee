@@ -1,12 +1,13 @@
 <template>
 <div class="container">
     <h4 class="bg-graphic">!</h4>
-    <vuescroll>
+    <vuescroll v-if="!loading">
       <div class="column">
       <h1 class="title">Antworten</h1>
-        <Question v-for="a in answers" :key="a.id" interactive hasAnswer :text="a.text" class="answer"/>
+        <Question v-for="a in answers" :key="a.id" :id="a.qid" interactive :count="a.count" hasAnswer :text="a.text" class="answer"/>
       </div>
     </vuescroll>
+    <h1 v-else class="title">Läd...</h1>
 </div>
 </template>
 <script>
@@ -21,29 +22,36 @@ export default {
   },
   data(){
     return {
-      answers: [
-        {text: "ehm, hallo?! is hirr wea?"},
-        {text: "noch ne frage, weil wegen testen"},
-                {text: "ehm, hallo?! is hirr wea?"},
-        {text: "noch ne frage, weil wegen testen"},
-                {text: "ehm, hallo?! is hirr wea?"},
-        {text: "noch ne frage, weil wegen testen"},
-                {text: "ehm, hallo?! is hirr wea?"},
-        {text: "noch ne frage, weil wegen testen"},        {text: "ehm, hallo?! is hirr wea?"},
-        {text: "noch ne frage, weil wegen testen"},        {text: "ehm, hallo?! is hirr wea?"},
-        {text: "noch ne frage, weil wegen testen"},        {text: "ehm, hallo?! is hirr wea?"},
-        {text: "noch ne frage, weil wegen testen"},        {text: "ehm, hallo?! is hirr wea?"},
-        {text: "noch ne frage, weil wegen testen"},        {text: "ehm, hallo?! is hirr wea?"},
-        {text: "noch ne frage, weil wegen testen"},        {text: "ehm, hallo?! is hirr wea?"},
-        {text: "noch ne frage, weil wegen testen"},        {text: "ehm, hallo?! is hirr wea?"},
-        {text: "noch ne frage, weil wegen testen"},        {text: "ehm, hallo?! is hirr wea?"},
-        {text: "noch ne frage, weil wegen testen"},        {text: "ehm, hallo?! is hirr wea?"},
-        {text: "noch ne frage, weil wegen testen"},        {text: "ehm, hallo?! is hirr wea?"},
-        {text: "noch ne frage, weil wegen testen"},        {text: "ehm, hallo?! is hirr wea?"},
-        {text: "noch ne frage, weil wegen testen"},
-        {text: "i bims no 1 frage, aber dismal mit viel mehr text, damit ich kann gucken ob das macht ein schnitt oder nischt"}
+      answers: [],
+      loading: false
+    }
+  },
+  created(){
+    this.getQuestions();
+  },
+  methods: {
+    getQuestions: async function(){
+      this.loading = true;
+      var _response = await this.$api.db.question.get({
+        "userid":this.$api.usr.id
+      },this.$tkn);
+      var q = _response.data;
+      for(var i = 0; i < q.length; i++){
+        //console.log("checking ", q[i].qid);
+        var _response2 = await this.$api.db.answer.get({
+          "qid":q[i].qid
+        },this.$tkn);
+        //console.log("answers for "+q[i].qid,_response2);
+        var awsCount = _response2.data.length;
+        this.answers.push({
+          "text":q[i].text.toString(),
+          "count":awsCount,
+          "qid":q[i].qid,
 
-      ]
+        });
+      }
+      this.loading = false;
+
     }
   }
 }

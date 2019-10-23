@@ -3,7 +3,7 @@
     <div class="notification">
     <p>{{ text }}</p>
     <button v-if="interactive" class="reply" @click="interaction">
-        <h1 class="title" v-if="hasAnswer">{{ numAnswers }}</h1>
+        <h1 class="title" v-if="hasAnswer">{{ answers }}</h1>
         <font-awesome-icon v-else icon="reply"/></button>
 
     </div>
@@ -18,13 +18,15 @@ export default {
     components:{
     },
     props: {
+        count: Number,
+        id: Number,
         text: String,
         hasAnswer: Boolean,
         interactive: Boolean
     },
     data: function(){
         return{
-        answers:'10',
+        answers: this.$props.count,
         open:false
         };
     },
@@ -47,11 +49,11 @@ export default {
             const self = this;
             if(this.hasAnswer){
                 //Send me to the Answers!
-                self.$router.push({name:'readanswer', params: {question: this.text}});
+                self.$router.push({name:'readanswer', params: {question: this.text,qid: this.id}});
             }else{
                 //I will write an Answer
                 
-                self.$router.push({name:'writeanswer', params: {question: this.text}});
+                self.$router.push({name:'writeanswer', params: {question: this.text,qid: this.id}});
 console.log('i will write an answer!');            
             }
         }

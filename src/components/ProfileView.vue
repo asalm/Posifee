@@ -4,6 +4,43 @@
 
     <vuescroll>
 
+    <div class="column">
+        <div class="level">
+            <div class="level-left">
+                <h1 class="title">Profil</h1>
+            </div>
+            <div class="level-right">
+                <h1 class="title has-text-right">{{nickname}}</h1>
+            </div>
+        </div>
+        <div class="columns is-centered is-multiline">
+            <div class="column is-3" style="max-height:2em">
+                <div class="box is-success">
+                <h1 class="title">{{pos}}</h1>
+                positiv
+                </div>
+            </div>
+            <div class="column is-3" style="max-height:2em">
+                <div class="box is-danger">
+                <h1 class="title">{{neg}}</h1>
+                negativ
+                </div>
+            </div>
+            <div class="column is-3" style="max-height:2em">
+                <div class="box is-danger">
+                    <h1 class="title">{{total}}</h1>
+                    gesamt
+                </div>
+            </div>
+            <!--
+            <div class="column is-3" style="max-height:2em">
+                <VueApexCharts type=radialBar height=48 :options="chartOptions" :series="series" />
+            </div>
+            -->
+        </div>
+        <Answer v-for="a in answers" :key="a.id" :id="$id(a.aid)" :text="a.text" :pos="a.positive" :neg="a.negative" />
+    </div>
+    <!--
         <h1 class="title">Profil</h1>
         <div class="columns is-multiline">
             <div class="column is-12">
@@ -24,24 +61,30 @@
                 
             </div>
         </div>
+    -->
     </vuescroll>
 </div>
 </template>
 <script>
 //import Question from '../components/Question.vue'
 import VueApexCharts from 'vue-apexcharts';
+import Answer from '@/components/Answer';
+import vuescroll from 'vuescroll';
+
 export default {
   name: 'pView',
   components: {
-      VueApexCharts,
+      VueApexCharts, Answer, vuescroll
   },
   props:{
       username: String,
   },
   data: function() {
       return{
+      answers:[],
+      loading: false,
       //series: [3,7], //percentbased
-      total: '100',
+      //total: '100',
       chartOptions: {
           plotOptions:{
               radialBar: {
@@ -66,10 +109,16 @@ export default {
               }
           },
           labels: ['Gute Antworten','Schlechte Antworten'],
-      }
+      },
+      pos:0,
+      neg:0,
+      nickname:this.$api.usr.nickname
     };
   },
   computed:{
+      total: function(){
+          return parseInt(this.pos) + parseInt(this.neg);
+      },
       series: function(){
           const seriesarray = new Array();
               var total = 100;
@@ -83,6 +132,32 @@ export default {
           return seriesarray;
       }
   },
+  created(){
+      this.getAnswers();
+  },
+  methods: {
+      getAnswers: async function(){
+            this.loading = true;
+            var _response = await this.$api.db.answer.get({
+                "userid":this.$api.usr.id
+            },this.$tkn);
+            var a = _response.data;
+
+            for(var i = 0; i < a.length; i++){
+                if(a[i].positive){
+                    this.pos += 1;
+                }else if(a[i].negative){
+                    this.neg += 1;
+                }
+                this.answers.push({
+                    "aid":a[i].aid,
+                    "text":a[i].text,
+                    "positive":Boolean(a[i].positive),
+                    "negative":Boolean(a[i].negative),
+                })
+            }
+        }
+  }
 }
 </script>
 <style scoped>
@@ -145,7 +220,12 @@ user-select: none;
     transition: all 0.8s;
 }
 
-
+.box .title{
+    margin-top:0em;
+    font-family:monospace;
+    font-size:24pt;
+    font-weight:bolder;
+}
 
 .level{
   margin-top:3em;
@@ -161,10 +241,16 @@ user-select: none;
     font-weight:200;
 }
 
+.columns{
+    margin-bottom:1em;
+}
+
 .column{
   z-index:8;
   max-height:40em !important;
-  padding-bottom:6em;
+}
+.column:nth-last-child(){
+      padding-bottom:6em;
 }
 .container{
       transition:all 0.8s;

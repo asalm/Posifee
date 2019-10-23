@@ -1,28 +1,23 @@
 <template>
-<div class="container">
-      <h4 class="bg-graphic">?</h4>
-      <vuescroll>
-
-    <div class="column">
-      <div class="level">
-        <div class="level-left">
-            <h1 class="title">Fragen</h1>
+  <div class="container">
+    <h4 class="bg-graphic">?</h4>
+    <vuescroll v-if="!loading">
+      <div class="column">
+        <div class="level">
+          <div class="level-left">
+              <h1 class="title">Fragen</h1>
+          </div>
+          <div class="level-right">
+              <button class="button" @click="interaction">Frage verfassen!</button>
+          </div>
         </div>
-        <div clasS="level-right">
-            <button class="button" @click="interaction">Frage verfassen!</button>
-
-        </div>
+        <Question v-for="q in questions" :key="q.id" interactive :id="q.qid" :text="q.text" class="question"/>
       </div>
-
-    <Question v-for="q in questions" :key="q.id" interactive :text="q.text" class="question"/>
-    </div>
-    
-          </vuescroll>
-
-
-
-</div>
+    </vuescroll>
+    <h1 v-else class="title">Läd...</h1>
+  </div>
 </template>
+
 <script>
 import Question from '../components/Question.vue'
 import vuescroll from 'vuescroll';
@@ -33,30 +28,13 @@ export default {
     Question,
     vuescroll
   },
+  created(){
+    this.getQuestions();
+  },
   data(){
     return {
-      questions:[
-        {text: "ehm, hallo?! is hirr wea?"},
-        {text: "noch ne frage, weil wegen testen"},
-                {text: "ehm, hallo?! is hirr wea?"},
-        {text: "noch ne frage, weil wegen testen"},
-                {text: "ehm, hallo?! is hirr wea?"},
-        {text: "noch ne frage, weil wegen testen"},
-                {text: "ehm, hallo?! is hirr wea?"},
-        {text: "noch ne frage, weil wegen testen"},        {text: "ehm, hallo?! is hirr wea?"},
-        {text: "noch ne frage, weil wegen testen"},        {text: "ehm, hallo?! is hirr wea?"},
-        {text: "noch ne frage, weil wegen testen"},        {text: "ehm, hallo?! is hirr wea?"},
-        {text: "noch ne frage, weil wegen testen"},        {text: "ehm, hallo?! is hirr wea?"},
-        {text: "noch ne frage, weil wegen testen"},        {text: "ehm, hallo?! is hirr wea?"},
-        {text: "noch ne frage, weil wegen testen"},        {text: "ehm, hallo?! is hirr wea?"},
-        {text: "noch ne frage, weil wegen testen"},        {text: "ehm, hallo?! is hirr wea?"},
-        {text: "noch ne frage, weil wegen testen"},        {text: "ehm, hallo?! is hirr wea?"},
-        {text: "noch ne frage, weil wegen testen"},        {text: "ehm, hallo?! is hirr wea?"},
-        {text: "noch ne frage, weil wegen testen"},        {text: "ehm, hallo?! is hirr wea?"},
-        {text: "noch ne frage, weil wegen testen"},        {text: "ehm, hallo?! is hirr wea?"},
-        {text: "noch ne frage, weil wegen testen"},
-        {text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi vel ex quis tortor eleifend auctor vitae et nulla. Nulla eu tempor dui, a efficitur massa. Nam ullamcorper arcu quis dolor congue, quis tristique justo ornare. Morbi commodo nulla luctus, pulvinar orci eu, sagittis augue. Maecenas fringilla enim ut orci efficitur, vitae iaculis tortor ullamcorper. Proin suscipit bibendum rhoncus. Nam felis erat, accumsan rhoncus nibh sit amet, consequat blandit tellus. Suspendisse sit amet sem metus. "}
-      ]
+      questions:[],
+      loading: false
     }
   },
   methods: {
@@ -64,6 +42,19 @@ export default {
       event.preventDefault();
 
       this.$router.push({name:'writequestion'});
+    },
+    getQuestions: async function(){
+      this.loading = true;
+      var _response =  await this.$api.db.question.get({}, this.$tkn);
+      var q = _response.data.reverse();
+      for(var i = 0; i < q.length; i++){
+        this.questions.push({
+          "text":q[i].text.toString(),
+          "qid":parseInt(q[i].qid),
+          "userID":parseInt(q[i].userID)
+        });
+      }
+      this.loading = false;
     }
   }
 }
