@@ -51,6 +51,7 @@ export default {
       var _response =  await this.$api.db.question.get({}, this.$tkn);
       var q = _response.data.reverse();
       var qf = q.filter(function(value){
+        console.log(value.userID,that.$api.usr.id);
         return value.userID != that.$api.usr.id;
       })
       for(var i = 0; i < q.length; i++){
