@@ -52,11 +52,10 @@ export default {
       var q = _response.data.reverse();
       var qf = q.filter(function(value){
         console.log(value);
-        console.log(value.userid,that.$api.usr.id);
-        if(value.userID != that.$api.usr.id){
+        if(parseInt(value.userID) != parseInt(that.$api.usr.id)){
           return value;
         }
-      })
+      });
       for(var i = 0; i < qf.length; i++){
         this.questions.push({
           "text":qf[i].text.toString(),
