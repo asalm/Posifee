@@ -58,6 +58,9 @@ export default {
             }
         if(this.$props.interactive){
             //Handle Swipe Upvote
+            while(this.dragged){
+                //Make it move!
+            }
             if(offsetX > 240){
                 //console.log("CONTAINER",this.id + "pulled Right { cX: " + clientX + ";; oX: " + offsetX)
                 this.upvote();
