@@ -52,9 +52,8 @@ export default {
       var q = _response.data.reverse();
       var qf = q.filter(function(value){
         console.log(value);
-        if(parseInt(value.userID) != parseInt(that.$api.usr.id)){
-          return value;
-        }
+          return (value.userID != parseInt(that.$api.usr.id)) ? true: false
+        
       });
       for(var i = 0; i < qf.length; i++){
         this.questions.push({
