@@ -33,7 +33,7 @@ export default {
     getQuestions: async function(){
       this.loading = true;
       var _response = await this.$api.db.question.get({
-        "userid":this.$api.usr.id
+        "userid": parseInt(this.$api.usr.id)
       },this.$tkn);
       var q = _response.data;
       for(var i = 0; i < q.length; i++){
