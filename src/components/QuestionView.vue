@@ -54,11 +54,11 @@ export default {
         console.log(value.userID,that.$api.usr.id);
         return value.userID != that.$api.usr.id;
       })
-      for(var i = 0; i < q.length; i++){
+      for(var i = 0; i < qf.length; i++){
         this.questions.push({
-          "text":q[i].text.toString(),
-          "qid":parseInt(q[i].qid),
-          "userID":parseInt(q[i].userID)
+          "text":qf[i].text.toString(),
+          "qid":parseInt(qf[i].qid),
+          "userID":parseInt(qf[i].userID)
         });
       }
       this.loading = false;
