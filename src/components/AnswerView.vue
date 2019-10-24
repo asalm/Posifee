@@ -102,7 +102,9 @@ user-select: none;
 .container{
       transition:all 0.8s;
 }
-
+html{
+  overflow:hidden;
+}
 /*
 @media only screen and (orientation: landscape){
   .container{

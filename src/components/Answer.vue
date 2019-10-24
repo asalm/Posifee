@@ -64,7 +64,7 @@ export default {
 
             //Handle Swipe Downvote
             }else if(offsetX < -240){
-                //console.log("CONTAINER",this.id + "pulled Left")
+                console.log("CONTAINER",this.id + "pulled Left")
                this.downvote();
             }
         }
@@ -102,11 +102,11 @@ export default {
                         "aid": [parseInt(this.$props.aid)]
                     },
                     update:{
-                        positive:Boolean(false),
-                        negative:Boolean(true)
+                        positive:"false",
+                        negative:"true"
                     }
                 },this.$tkn);
-                if(_response.response){
+                if(_response){
                     this.$data.negative = true;
                     this.$data.positive = false;
                 }
