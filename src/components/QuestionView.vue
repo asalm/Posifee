@@ -43,10 +43,16 @@ export default {
 
       this.$router.push({name:'writequestion'});
     },
+    
     getQuestions: async function(){
+//array.filter.where(userID = api.usr.id);
+
       this.loading = true;
       var _response =  await this.$api.db.question.get({}, this.$tkn);
       var q = _response.data.reverse();
+      var qf = q.filter(function(value){
+        return value.userID != this.$api.usr.id;
+      })
       for(var i = 0; i < q.length; i++){
         this.questions.push({
           "text":q[i].text.toString(),
