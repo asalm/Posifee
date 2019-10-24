@@ -1,0 +1,29 @@
+image: crowdcode/vue-cli
+
+cache:
+  paths:
+    - node_modules/
+
+before_script:
+
+deploy_stage:
+  stage: deploy
+  environment: Staging
+  only:
+    - master
+  script:
+    - rm ./package-lock.json
+    - npm install
+    - npm run build
+    - cd /home/dockeradmin/m2c/reset/tools/posifee/
+    - docker-compose restart
+
+deploy_production:
+  stage: deploy
+  environment: Production
+  only:
+    - tags
+  script:
+    - sudo rm ./package-lock.json
+    - npm install
+    - npm run build
