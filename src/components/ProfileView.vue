@@ -141,8 +141,11 @@ export default {
             var _response = await this.$api.db.answer.get({
                 "userid":this.$api.usr.id
             },this.$tkn);
-            var a = _response.data;
-
+            var a = _response.data.reverse();
+            var af = a.filter(function(value){
+                return (parseInt(value.userid) === parseInt(that.$api.usr.id)) ? true: false
+        
+            });
             for(var i = 0; i < a.length; i++){
                 if(a[i].positive){
                     this.pos += 1;

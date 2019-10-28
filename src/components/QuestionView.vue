@@ -45,13 +45,11 @@ export default {
     },
     
     getQuestions: async function(){
-//array.filter.where(userID = api.usr.id);
       var that = this;
       this.loading = true;
       var _response =  await this.$api.db.question.get({}, this.$tkn);
       var q = _response.data.reverse();
       var qf = q.filter(function(value){
-        console.log(value);
           return (parseInt(value.userid) === parseInt(that.$api.usr.id)) ? false: true
         
       });
