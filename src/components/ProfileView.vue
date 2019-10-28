@@ -142,21 +142,22 @@ export default {
                 "userid":this.$api.usr.id
             },this.$tkn);
             var a = _response.data.reverse();
+            console.log(a);
             var af = a.filter(function(value){
                 return (parseInt(value.userid) === parseInt(that.$api.usr.id)) ? true: false
         
             });
-            for(var i = 0; i < a.length; i++){
-                if(a[i].positive){
+            for(var i = 0; i < af.length; i++){
+                if(af[i].positive){
                     this.pos += 1;
-                }else if(a[i].negative){
+                }else if(af[i].negative){
                     this.neg += 1;
                 }
                 this.answers.push({
-                    "aid":a[i].aid,
-                    "text":a[i].text,
-                    "positive":Boolean(a[i].positive),
-                    "negative":Boolean(a[i].negative),
+                    "aid":af[i].aid,
+                    "text":af[i].text,
+                    "positive":Boolean(af[i].positive),
+                    "negative":Boolean(af[i].negative),
                 })
             }
         }
