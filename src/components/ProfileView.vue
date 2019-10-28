@@ -162,6 +162,7 @@ export default {
                     "negative":Boolean(af[i].negative),
                 })
             }
+            this.loading = false;
         }
   }
 }
