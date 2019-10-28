@@ -2,7 +2,7 @@
 <div class="container">
     <h4 class="bg-graphic">*</h4>
 
-    <vuescroll>
+    <vuescroll v-if="!loading">
 
     <div class="column">
         <div class="level">
@@ -63,6 +63,7 @@
         </div>
     -->
     </vuescroll>
+    <h1 v-else class="title">Läd...</h1>
 </div>
 </template>
 <script>

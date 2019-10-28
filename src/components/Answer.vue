@@ -60,16 +60,21 @@ export default {
             //Handle Swipe Upvote
             while(this.dragged){
                 //Make it move!
-            }
-            if(offsetX > 240){
+                if(offsetX > 0){
+                    document.getElementById(this.id).style.transform = "translateX("+offsetX+")";
+                }else if(offsetX < 0){
+                    document.getElementById(this.id).style.transform = "translateX(-"+offsetX+")";
+                }
+                if(offsetX > 240){
                 //console.log("CONTAINER",this.id + "pulled Right { cX: " + clientX + ";; oX: " + offsetX)
                 this.upvote();
-
-            //Handle Swipe Downvote
-            }else if(offsetX < -240){
-                console.log("CONTAINER",this.id + "pulled Left")
-               this.downvote();
+                //Handle Swipe Downvote
+                }else if(offsetX < -240){
+                    console.log("CONTAINER",this.id + "pulled Left")
+                this.downvote();
+                }
             }
+            
         }
                 deltaX = 0;
                 deltaY = 0;
