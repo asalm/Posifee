@@ -138,6 +138,7 @@ export default {
   methods: {
       getAnswers: async function(){
             this.loading = true;
+            var that = this;
             var _response = await this.$api.db.answer.get({
                 "userid":this.$api.usr.id
             },this.$tkn);
