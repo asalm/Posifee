@@ -57,8 +57,10 @@ export default {
                 return
             }
         if(this.$props.interactive){
+            // Maybe check this out for animations
+            //            https://wiki.selfhtml.org/wiki/JavaScript/DOM/Element/animate
+
             //Handle Swipe Upvote
-            while(this.dragged){
                 //Make it move!
                 if(offsetX > 0){
                     document.getElementById(this.id).style.transform = "translateX("+offsetX+")";
@@ -73,9 +75,8 @@ export default {
                     console.log("CONTAINER",this.id + "pulled Left")
                 this.downvote();
                 }
-            }
             
-        }
+            }
                 deltaX = 0;
                 deltaY = 0;
                 offsetX = 0;
