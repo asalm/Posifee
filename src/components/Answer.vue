@@ -47,6 +47,14 @@ export default {
                 return
             }
             if (last) {
+                if(this.$props.interactive){
+                    if(offsetX > 240){
+                        this.upvote();
+                    //Handle Swipe Downvote
+                    }else if(offsetX < -240){
+                        this.downvote();
+                    }
+                }
                 this.dragged = false;
                 deltaX = 0;
                 deltaY = 0;
@@ -56,10 +64,16 @@ export default {
                 clientY = 0;
                 return
             }
-        if(this.$props.interactive){
+        //if(this.$props.interactive){
             // Maybe check this out for animations
             //            https://wiki.selfhtml.org/wiki/JavaScript/DOM/Element/animate
-
+            var aws = document.getElementById(this.id);
+            console.log("coords",deltaX,offsetX,clientX);
+            if(clientX > 0){
+                aws.animate({
+                    transform: ["translate(0px)","translate("+offsetX+")"]
+                },(400));
+            }
             //Handle Swipe Upvote
                 //Make it move!
                 if(offsetX > 0){
@@ -67,23 +81,16 @@ export default {
                 }else if(offsetX < 0){
                     document.getElementById(this.id).style.transform = "translateX(-"+offsetX+")";
                 }
-                if(offsetX > 240){
-                //console.log("CONTAINER",this.id + "pulled Right { cX: " + clientX + ";; oX: " + offsetX)
-                this.upvote();
-                //Handle Swipe Downvote
-                }else if(offsetX < -240){
-                    console.log("CONTAINER",this.id + "pulled Left")
-                this.downvote();
-                }
+                
             
-            }
+            }   /*
                 deltaX = 0;
                 deltaY = 0;
                 offsetX = 0;
                 offsetY = 0;
                 clientX = 0;
                 clientY = 0;
-                this.dragged = false;
+                this.dragged = false;*/
             
             },
 
