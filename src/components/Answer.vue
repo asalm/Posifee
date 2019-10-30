@@ -83,7 +83,7 @@ export default {
                 }
                 
             
-            }   /*
+              /*
                 deltaX = 0;
                 deltaY = 0;
                 offsetX = 0;
