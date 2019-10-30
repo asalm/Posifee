@@ -68,12 +68,8 @@ export default {
             // Maybe check this out for animations
             //            https://wiki.selfhtml.org/wiki/JavaScript/DOM/Element/animate
             var aws = document.getElementById(this.id);
-            console.log("coords",deltaX,offsetX,clientX);
-            if(clientX > 0){
-                aws.animate({
-                    transform: ["translate(0px)","translate("+offsetX+")"]
-                },(400));
-            }
+            //console.log("coords",deltaX,offsetX,clientX);
+
             //Handle Swipe Upvote
                 //Make it move!
                 if(offsetX > 0){
@@ -156,7 +152,12 @@ export default {
     -ms-user-select: none;      /* IE 10+ */
     user-select: none;          /* Likely future */     
 }
-
+.is-danger{
+    transform:translateX(-25px);
+}
+.is-success{
+    transform:translateX(25px);
+}
 .notification p{
     text-align:left;
 }
