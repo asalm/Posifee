@@ -118,7 +118,7 @@ export default {
   },
   computed:{
       total: function(){
-          return parseInt(this.pos) + parseInt(this.neg);
+          return parseInt(this.answers.length);
       },
       series: function(){
           const seriesarray = new Array();
@@ -144,10 +144,8 @@ export default {
                 "userid":this.$api.usr.id
             },this.$tkn);
             var a = _response.data.reverse();
-            console.log(a);
             var af = a.filter(function(value){
                 return (parseInt(value.userid) === parseInt(that.$api.usr.id)) ? true: false
-        
             });
             for(var i = 0; i < af.length; i++){
                 if(af[i].positive){
