@@ -47,11 +47,13 @@ export default {
                 return
             }
             if (last) {
+                console.log("stopped moving");
                 if(this.$props.interactive){
-                    if(offsetX > 240){
+                    if(clientX > 180){
+                        console.log()
                         this.upvote();
                     //Handle Swipe Downvote
-                    }else if(offsetX < -240){
+                    }else if(clientX < -180){
                         this.downvote();
                     }
                 }
@@ -109,6 +111,7 @@ export default {
                 }
             },
             downvote: async function(){
+                console.log("attempting downvote");
                 var _response = await this.$api.db.answer.update({
                     row:{
                         "aid": [parseInt(this.$props.aid)]
