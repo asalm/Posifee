@@ -20,7 +20,7 @@
                 v-model="inputText"
                 minlength="10"
                 maxlength="500"
-                @keyup.native.enter="enter"
+                @submit.prevent
                 placeholder="Maxlength automatically counts characters">
             </b-input>
             </b-field>

@@ -17,7 +17,7 @@
                 v-model="inputText"
                 minlength="10"
                 maxlength="500"
-                @keyup.native.enter="enter"
+                @submit.prevent
                 placeholder="Maximal 500 Zeichen.">
             </b-input>
             </b-field>
