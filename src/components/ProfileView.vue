@@ -149,7 +149,7 @@ export default {
             this.loading = false;
     },
     toFeedback: function(){
-        self.$router.push({name:'writefeedback'});
+        this.$router.push({name:'writefeedback'});
     }
 
   }

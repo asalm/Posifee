@@ -12,8 +12,8 @@
         </div>
         <div class="container" style="margin-bottom:2em">
             <h1 class="title">Deine Frage:</h1>
-            <b-field v-if="!submitted">
-            <b-input type="textarea"
+            <!--<b-field  @keydown.native.enter="enter($event)">-->
+            <b-input v-if="!submitted" type="textarea"
                 v-model="inputText"
                 minlength="10"
                 maxlength="500"
@@ -21,7 +21,6 @@
                 v-on:keydown.13="enter($event)"
                 placeholder="Maximal 500 Zeichen.">
             </b-input>
-            </b-field>
             <div v-else class="column">
                 <Question :text="this.inputText"/>
             </div>
