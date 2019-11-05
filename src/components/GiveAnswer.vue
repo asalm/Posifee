@@ -16,22 +16,22 @@
         <div class="container" style="margin-bottom:2em">
             <h1 class="title">Deine Antwort:</h1>
             <b-field>
-            <b-input v-if="!submitted" type="textarea"
+            <b-input v-if="!submitted && !staged" type="textarea"
                 v-model="inputText"
                 minlength="10"
                 maxlength="500"
-                @submit.prevent
+                @keypress.prevent
                 placeholder="Maxlength automatically counts characters">
             </b-input>
             </b-field>
-            <div class="notification is-warning">
+            <div class="notification is-warning" v-if="staged">
                 <p>{{inputText}}</p>
             </div>
         </div>
         <div class="container" style="margin-bottom:2em">
             <b-button v-if="!staged" v-on:click="submit()">Antworten</b-button>
             <b-button v-if="staged" v-on:click="submit()">Abschicken</b-button>
-            <b-button v-else v-on:click="back()">Zurück</b-button>
+            <b-button v-if="staged && submitted" v-on:click="back()">Zurück</b-button>
         </div>
     </vuescroll>
     <!-- SUBMIT REVIEW -->
@@ -62,7 +62,8 @@ export default {
     methods:{
         back: function(){
             const self = this
-
+            staged = false;
+            submitted = false;
             self.$router.go(-1);
         },
         enter: function(){
