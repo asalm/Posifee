@@ -24,9 +24,13 @@
                 placeholder="Maxlength automatically counts characters">
             </b-input>
             </b-field>
+            <div class="notification is-warning">
+                <p>{{inputText}}</p>
+            </div>
         </div>
         <div class="container" style="margin-bottom:2em">
-            <b-button v-if="!submitted" v-on:click="submit()">Abschicken</b-button>
+            <b-button v-if="!staged" v-on:click="submit()">Antworten</b-button>
+            <b-button v-if="staged" v-on:click="submit()">Abschicken</b-button>
             <b-button v-else v-on:click="back()">Zurück</b-button>
         </div>
     </vuescroll>
@@ -51,6 +55,7 @@ export default {
     data(){
         return{
             inputText:"",
+            staged: false,
             submitted: false,
         }
     },
@@ -64,18 +69,23 @@ export default {
             //e.preventDefaults();
         },
         submit: async function(){
-            console.log("ANSWERING TO: ",this.$props.qid);
-            var submission = await this.$api.db.answer.insert({
+
+            if(this.staged){
+                console.log("ANSWERING TO: ",this.$props.qid);
+                var submission = await this.$api.db.answer.insert({
                 "qID":this.$props.qid,
                 "userID":this.$api.usr.id,
                 "text": this.inputText,
                 "positive":false,
                 "negative":false
-            },this.$tkn);
-            
-            if(submission.response === "transmission accepted"){
-                this.submitted = true;
+                },this.$tkn);     
+                if(submission.response === "transmission accepted"){
+                    this.submitted = true;
+                }
+            }else{
+                this.staged = true;
             }
+            
         }
     },
     watch: {
