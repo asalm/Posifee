@@ -20,6 +20,7 @@
                 v-model="inputText"
                 minlength="10"
                 maxlength="500"
+                @keyup.native.enter="enter"
                 placeholder="Maxlength automatically counts characters">
             </b-input>
             </b-field>
@@ -29,6 +30,7 @@
             <b-button v-else v-on:click="back()">Zurück</b-button>
         </div>
     </vuescroll>
+    <!-- SUBMIT REVIEW -->
 </div>
 </div>
 </template>
@@ -57,6 +59,9 @@ export default {
             const self = this
 
             self.$router.go(-1);
+        },
+        enter: function(){
+            //e.preventDefaults();
         },
         submit: async function(){
             console.log("ANSWERING TO: ",this.$props.qid);

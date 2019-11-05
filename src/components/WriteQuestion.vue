@@ -17,7 +17,8 @@
                 v-model="inputText"
                 minlength="10"
                 maxlength="500"
-                placeholder="Maxlength automatically counts characters">
+                @keyup.native.enter="enter"
+                placeholder="Maximal 500 Zeichen.">
             </b-input>
             </b-field>
             <div v-else class="column">
@@ -28,6 +29,7 @@
             <b-button v-if="!submitted" v-on:click="submit()">Abschicken</b-button>
             <b-button v-else v-on:click="back()">Zurück</b-button>
         </div>
+        <!-- FIX ERROR WITH ENTER SUBMIT -->
 </div>
 </div>
 </template>
@@ -51,6 +53,9 @@ export default {
             const self = this
 
             self.$router.go(-1);
+        },
+        enter: function(){
+            //e.preventDefaults();
         },
         submit: async function(){
             var submission = await this.$api.db.question.insert({

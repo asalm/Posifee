@@ -39,28 +39,12 @@
             -->
         </div>
         <Answer v-for="a in answers" :key="a.id" :id="$id(a.aid)" :text="a.text" :pos="a.positive" :neg="a.negative" />
+        <div class="column is-12">
+            <button class="button">Feedback einreichen...</button>
+        </div>
     </div>
     <!--
-        <h1 class="title">Profil</h1>
-        <div class="columns is-multiline">
-            <div class="column is-12">
-                <h1 class="subtitle has-text-left">Hallo, {{username}}</h1>
-                <div class="notification">
-                    <p>
-                        Du hast <b> 13 </b> Fragen gestellt und
-                        <b> 32 </b> Antworten abgegeben.
-                        Du hast für {{series[0]}} von {{total}} Antworten konstruktives Feedback bekommen!
-                </p>
-                </div>
-            </div>
-            <div class="column is-6">
-                <VueApexCharts type=radialBar height=300 :options="chartOptions" :series="series" />
-            </div>
-            <div class="column is-12">
-                <h1 class="title">Meine Fragen:</h1>
-                
-            </div>
-        </div>
+        Feedback Funktionalität einrichten!
     -->
     </vuescroll>
     <h1 v-else class="title">Läd...</h1>

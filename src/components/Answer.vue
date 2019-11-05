@@ -48,12 +48,15 @@ export default {
             }
             if (last) {
                 console.log("stopped moving");
+                /*
+                    Create new Overlay with upvote and downvote!
+                */
                 if(this.$props.interactive){
-                    if(clientX > 180){
+                    if(deltaX > 180){
                         console.log()
                         this.upvote();
                     //Handle Swipe Downvote
-                    }else if(clientX < -180){
+                    }else if(deltaX < -180){
                         this.downvote();
                     }
                 }
@@ -93,6 +96,7 @@ export default {
             },
 
             upvote: async function(){
+                reset();
                 console.log("attemping upvote");
 
                 var _response = await this.$api.db.answer.update({
@@ -104,13 +108,14 @@ export default {
                         negative: "false"
                     }
                 },this.$tkn);
-                //console.log(_response);
+                console.log(_response);
                 if(_response){
                     this.$data.negative = false;
                     this.$data.positive = true;
                 }
             },
             downvote: async function(){
+                reset();
                 console.log("attempting downvote");
                 var _response = await this.$api.db.answer.update({
                     row:{
