@@ -7,21 +7,17 @@
     </div>
 <div class="qContainer">
         <div class="container" style="margin-bottom:3em">
-            <h1 class="title">Frag etwas!</h1>
-            <p>Stell eine Frage an die Community! Nur du kannst die Antworten dieser Frage lesen.</p>
+            <h1 class="title">Feedback einreichen!</h1>
+            <p>Wie gefällt dir die Anwendung? Was hat dich überrascht, was dir gefehlt? Gib Feedback zurück an die Entwickler um die Anwendung zu verbessern.</p>
         </div>
         <div class="container" style="margin-bottom:2em">
-            <h1 class="title">Deine Frage:</h1>
+            <h1 class="title">Dein Feedback:</h1>
             <b-field v-if="!submitted">
             <b-input type="textarea"
                 v-model="inputText"
                 minlength="10"
                 maxlength="500"
-<<<<<<< HEAD
-                @submit.prevent="enter()"
-=======
                 @keypress.prevent
->>>>>>> 252871a3be463ab2fcc7e0b46c9b8f2f5e86c5e1
                 placeholder="Maximal 500 Zeichen.">
             </b-input>
             </b-field>
@@ -40,7 +36,7 @@
 <script>
 import Question from '../components/Question.vue'
 export default {
-    name:'writequestion',
+    name:'writefeedback',
     components:{
         Question,
     },
@@ -62,9 +58,9 @@ export default {
             //e.preventDefaults();
         },
         submit: async function(){
-            var submission = await this.$api.db.question.insert({
-                "userID": parseInt(this.$api.usr.id),
-                "text": this.inputText
+            var submission = await this.$api.db.feedback.insert({
+                "text": this.inputText,
+                "date": new Date().now()
             }, this.$tkn)
 
             if(submission.response === "transmission accepted"){

@@ -33,7 +33,6 @@ export default {
         //console.log("im number " + s.aid + " from " + s.userid + ".",s.text,"im"+ s.pos +" and " +s.neg);
         
         if(s.pos){
-            console.log
             this.$data.positive = true;
         }
         if(s.neg){
@@ -52,11 +51,11 @@ export default {
                     Create new Overlay with upvote and downvote!
                 */
                 if(this.$props.interactive){
-                    if(deltaX > 180){
+                    if(offsetX > 180){
                         console.log()
                         this.upvote();
                     //Handle Swipe Downvote
-                    }else if(deltaX < -180){
+                    }else if(offsetX < -180){
                         this.downvote();
                     }
                 }

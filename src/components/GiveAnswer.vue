@@ -16,15 +16,19 @@
         <div class="container" style="margin-bottom:2em">
             <h1 class="title">Deine Antwort:</h1>
             <b-field>
-            <b-input v-if="!submitted" type="textarea"
+            <b-input v-if="!submitted && !staged" type="textarea"
                 v-model="inputText"
                 minlength="10"
                 maxlength="500"
+<<<<<<< HEAD
                 @submit.prevent="enter()"
+=======
+                @keypress.prevent
+>>>>>>> 252871a3be463ab2fcc7e0b46c9b8f2f5e86c5e1
                 placeholder="Maxlength automatically counts characters">
             </b-input>
             </b-field>
-            <div class="notification is-warning">
+            <div class="notification is-warning" v-if="staged">
                 <p>{{inputText}}</p>
             </div>
         </div>
@@ -62,7 +66,8 @@ export default {
     methods:{
         back: function(){
             const self = this
-
+            staged = false;
+            submitted = false;
             self.$router.go(-1);
         },
         enter: function(){

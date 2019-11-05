@@ -8,6 +8,7 @@ import ProfileView from '@/components/ProfileView';
 import GiveAnswer from '@/components/GiveAnswer';
 import ReadAnswer from '@/components/ReadAnswer';
 import WriteQuestion from '@/components/WriteQuestion';
+import WriteFeedback from '@/components/WriteFeedback';
 
 Vue.use(Router);
 
@@ -51,9 +52,12 @@ export default new Router({
             name:'writequestion',
             path:'new',
             component: WriteQuestion
+          },
+          {
+            name:'writefeedback',
+            path:'fb',
+            component: WriteFeedback
           }
       ]
-
-    
     },
   ]})
