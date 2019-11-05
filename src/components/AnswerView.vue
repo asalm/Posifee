@@ -8,7 +8,7 @@
       </div>
     </vuescroll>
     <h1 v-else class="title">Läd...</h1>
-       <b-loading :is-full-page="isFullPage" :active.sync="loading"></b-loading>
+       <b-loading :is-full-page="true" :active.sync="loading"></b-loading>
 
 </div>
 </template>

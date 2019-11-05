@@ -1,7 +1,10 @@
 <template>
 <div>
     <div class="floating-button">
-        <b-button v-on:click="back">
+        <b-button 
+            v-on:click="back"
+            v-on:keydown.native.enter="enter"
+        >
             <font-awesome-icon icon="arrow-left"/>
         </b-button> 
     </div>
@@ -13,22 +16,34 @@
         <div class="container" style="margin-bottom:2em">
             <h1 class="title">Deine Frage:</h1>
             <!--<b-field  @keydown.native.enter="enter($event)">-->
-            <b-input v-if="!submitted" type="textarea"
-                v-model="inputText"
-                minlength="10"
-                maxlength="500"
-                @keydown.native.enter="enter($event)"
-                v-on:keydown.13="enter($event)"
-                placeholder="Maximal 500 Zeichen.">
-            </b-input>
-            <div v-else class="column">
-                <Question :text="this.inputText"/>
-            </div>
+            <form  v-on:submit.prevent="enter">
+                <b-input  v-if="!submitted" type="textarea"
+                    id="inputForm"
+                    v-on:keydown.native.enter="enter"
+                    v-model="inputText"
+                    minlength="10"
+                    maxlength="500"
+                    placeholder="Maximal 500 Zeichen."
+                />
+                <!--</input> -->
+                <div v-else class="column">
+                    <Question :text="this.inputText"/>
+                </div>
+                <b-button 
+                    v-if="!submitted"
+                    v-on:keydown.native.enter="enter"
+                    v-on:click="submit()">Abschicken
+                </b-button>
+                <b-button 
+                    v-else
+                    v-on:keydown.native.enter="enter"
+                    v-on:click="back()">Zurück
+                </b-button>
+            </form>
+
         </div>
-        <div class="container">
-            <b-button v-if="!submitted" v-on:click="submit()">Abschicken</b-button>
-            <b-button v-else v-on:click="back()">Zurück</b-button>
-        </div>
+
+
         <!-- FIX ERROR WITH ENTER SUBMIT -->
 </div>
 </div>
@@ -48,14 +63,28 @@ export default {
             submitted: false
         }
     },
+    mounted(){
+        //Event Prevent Defaults Forcing by Stefan Quy @https://stackoverflow.com/questions/31070479/prevent-form-submitting-when-pressing-enter-from-a-text-input-using-vue-js
+        let cb = event => {
+            if (event) event.preventDefault();
+            };
+            if (this.$el.nodeName.toLowerCase() === "form") {
+            this.$el.onsubmit = cb;
+            } else {
+            const forms = this.$el.getElementsByTagName("form");
+            for (let i = 0; i < forms.length; i++) {
+                const form = forms[i];
+                if (form) form.onsubmit = cb;
+            }
+        }
+    },
     methods:{
         back: function(){
             const self = this
 
             self.$router.go(-1);
         },
-        enter: function($event){
-            $event.preventDefault();
+        enter: function(){
         },
         submit: async function(){
             var submission = await this.$api.db.question.insert({

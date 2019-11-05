@@ -28,7 +28,7 @@
             </div>
         </div>
         <div class="column info-row">
-            <p><i>v0.1</i> - created with <b>❤︎</b> </p>
+            <p><i>v0.2</i> - created with <b>❤︎</b> </p>
         </div>
     </div>
 </section>
@@ -50,16 +50,22 @@ export default {
         text: String
     },
     mounted(){
-        window.addEventListener('keyup',function(event){
+        /*
+            window.addEventListener('keyup',function(event){
             event.preventDefault();
             if(event.keyCode === 13){
-                this.$router.push({path:'/q'});
+                
+                window.removeEventListener('keyup',false);
+
             }
-        }.bind(this));
+        }.bind(this)); */
     },
     methods: {
         toggleInfoModal:function(){
             this.$refs.infoModal.toggleVisibility(); 
+        },
+        enter: function(){
+            this.$router.push({path:'/q'});
         }
     }
 }

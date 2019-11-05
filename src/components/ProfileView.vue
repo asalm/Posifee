@@ -48,20 +48,20 @@
     -->
     </vuescroll>
     <h1 v-else class="title">Läd...</h1>
-     <b-loading :is-full-page="isFullPage" :active.sync="loading"></b-loading>
+     <b-loading :is-full-page="true" :active.sync="loading"></b-loading>
     <!-- BUEFY LOADING -->
 </div>
 </template>
 <script>
 //import Question from '../components/Question.vue'
-import VueApexCharts from 'vue-apexcharts';
+//import VueApexCharts from 'vue-apexcharts';
 import Answer from '@/components/Answer';
 import vuescroll from 'vuescroll';
 
 export default {
   name: 'pView',
   components: {
-      VueApexCharts, Answer, vuescroll
+       Answer, vuescroll //VueApexCharts,
   },
   props:{
       username: String,

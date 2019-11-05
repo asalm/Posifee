@@ -39,7 +39,6 @@
 </div>
 </template>
 <script>
-import Question from '@/components/Question';
 import vuescroll from 'vuescroll';
 
 export default {
@@ -49,7 +48,6 @@ export default {
         question:String
     },
     components:{
-        Question,
         vuescroll
     },
     data(){
@@ -62,8 +60,8 @@ export default {
     methods:{
         back: function(){
             const self = this
-            staged = false;
-            submitted = false;
+            this.staged = false;
+            this.submitted = false;
             self.$router.go(-1);
         },
         enter: function(e){
@@ -72,7 +70,6 @@ export default {
         submit: async function(){
 
             if(this.staged){
-                console.log("ANSWERING TO: ",this.$props.qid);
                 var submission = await this.$api.db.answer.insert({
                 "qID":this.$props.qid,
                 "userID":this.$api.usr.id,
@@ -91,8 +88,6 @@ export default {
     },
     watch: {
         inputText: function(){
-            //es-disable next-line
-            console.log(this.inputText);
         }
     }
 }
