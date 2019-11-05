@@ -20,7 +20,7 @@
                 v-model="inputText"
                 minlength="10"
                 maxlength="500"
-                @submit.prevent
+                @submit.prevent="enter()"
                 placeholder="Maxlength automatically counts characters">
             </b-input>
             </b-field>
@@ -31,7 +31,7 @@
         <div class="container" style="margin-bottom:2em">
             <b-button v-if="!staged" v-on:click="submit()">Antworten</b-button>
             <b-button v-if="staged" v-on:click="submit()">Abschicken</b-button>
-            <b-button v-else v-on:click="back()">Zurück</b-button>
+            <b-button v-if="staged && submitted" v-on:click="back()">Zurück</b-button>
         </div>
     </vuescroll>
     <!-- SUBMIT REVIEW -->
