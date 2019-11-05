@@ -54,8 +54,8 @@ export default {
 
             self.$router.go(-1);
         },
-        enter: function(e){
-            e.preventDefault();
+        enter: function($event){
+            $event.preventDefault();
         },
         submit: async function(){
             var submission = await this.$api.db.feedback.insert({

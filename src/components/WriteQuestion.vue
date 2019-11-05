@@ -18,6 +18,7 @@
                 minlength="10"
                 maxlength="500"
                 @keydown.native.enter="enter($event)"
+                v-on:keydown.13="enter($event)"
                 placeholder="Maximal 500 Zeichen.">
             </b-input>
             </b-field>
@@ -54,8 +55,8 @@ export default {
 
             self.$router.go(-1);
         },
-        enter: function(e){
-            e.preventDefault();
+        enter: function($event){
+            $event.preventDefault();
         },
         submit: async function(){
             var submission = await this.$api.db.question.insert({

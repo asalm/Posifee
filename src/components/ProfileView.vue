@@ -40,7 +40,7 @@
         </div>
         <Answer v-for="a in answers" :key="a.id" :id="$id(a.aid)" :text="a.text" :pos="a.positive" :neg="a.negative" />
         <div class="column is-12">
-            <button class="button">Feedback einreichen...</button>
+            <button class="button" @click="toFeedback()">Feedback einreichen...</button>
         </div>
     </div>
     <!--
@@ -147,7 +147,11 @@ export default {
                 })
             }
             this.loading = false;
-        }
+    },
+    toFeedback: function(){
+        self.$router.push({name:'writefeedback'});
+    }
+
   }
 }
 </script>
