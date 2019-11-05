@@ -17,7 +17,7 @@
                 v-model="inputText"
                 minlength="10"
                 maxlength="500"
-                @submit.prevent="enter()"
+                @keydown.native.enter="enter($event)"
                 placeholder="Maximal 500 Zeichen.">
             </b-input>
             </b-field>
@@ -54,8 +54,8 @@ export default {
 
             self.$router.go(-1);
         },
-        enter: function(){
-            //e.preventDefaults();
+        enter: function(e){
+            e.preventDefault();
         },
         submit: async function(){
             var submission = await this.$api.db.question.insert({

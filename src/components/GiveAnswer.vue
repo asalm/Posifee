@@ -20,7 +20,7 @@
                 v-model="inputText"
                 minlength="10"
                 maxlength="500"
-                @submit.prevent="enter()"
+                @keydown.native.enter="enter($event)"
                 placeholder="Maxlength automatically counts characters">
             </b-input>
             </b-field>
@@ -66,8 +66,8 @@ export default {
             submitted = false;
             self.$router.go(-1);
         },
-        enter: function(){
-            //e.preventDefaults();
+        enter: function(e){
+            e.preventDefault();
         },
         submit: async function(){
 
