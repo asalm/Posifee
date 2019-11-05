@@ -17,11 +17,7 @@
                 v-model="inputText"
                 minlength="10"
                 maxlength="500"
-<<<<<<< HEAD
                 @submit.prevent="enter()"
-=======
-                @keypress.prevent
->>>>>>> 252871a3be463ab2fcc7e0b46c9b8f2f5e86c5e1
                 placeholder="Maximal 500 Zeichen.">
             </b-input>
             </b-field>

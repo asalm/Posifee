@@ -48,6 +48,7 @@
     -->
     </vuescroll>
     <h1 v-else class="title">Läd...</h1>
+     <b-loading :is-full-page="isFullPage" :active.sync="loading"></b-loading>
     <!-- BUEFY LOADING -->
 </div>
 </template>
