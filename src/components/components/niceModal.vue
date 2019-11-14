@@ -61,8 +61,6 @@ export default {
             this.visible = !this.visible;
             var operation = this.visible?'visible':'hidden';
             document.getElementById('ovl').style.visibility = operation;
-            //eslint-disable-next-line
-            console.log("triggered" + this.visible);
 
         }
     },

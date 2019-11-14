@@ -54,7 +54,6 @@ export default {
                 //I will write an Answer
                 
                 self.$router.push({name:'writeanswer', params: {question: this.text,qid: this.id}});
-console.log('i will write an answer!');            
             }
         }
     }

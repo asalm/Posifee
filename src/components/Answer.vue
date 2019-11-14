@@ -1,5 +1,5 @@
 <template>
-<div class="container" v-dragged="onDragged">
+<div class="container" v-dragged="onDragged" v-on:dblclick="reset()">
     <!-- Swipe Right for Positive Vote -->
     <!-- Swipe Left for Negative Vote -->
     <div v-on:dblclick="reset()" class="notification" :id="id">
@@ -8,8 +8,6 @@
 </div>    
 </template>
 <script>
-import _ from 'lodash';
-
 export default {
     name:'answer',
     props: {
@@ -46,19 +44,11 @@ export default {
                 return
             }
             if (last) {
-                console.log("stopped moving");
                 /*
+                console.log("stopped moving");
+                
                     Create new Overlay with upvote and downvote!
                 */
-                if(this.$props.interactive){
-                    if(offsetX > 180){
-                        console.log()
-                        this.upvote();
-                    //Handle Swipe Downvote
-                    }else if(offsetX < -180){
-                        this.downvote();
-                    }
-                }
                 this.dragged = false;
                 deltaX = 0;
                 deltaY = 0;
@@ -68,36 +58,18 @@ export default {
                 clientY = 0;
                 return
             }
-        //if(this.$props.interactive){
-            // Maybe check this out for animations
-            //            https://wiki.selfhtml.org/wiki/JavaScript/DOM/Element/animate
-            var aws = document.getElementById(this.id);
-            //console.log("coords",deltaX,offsetX,clientX);
-
-            //Handle Swipe Upvote
-                //Make it move!
-                if(offsetX > 0){
-                    document.getElementById(this.id).style.transform = "translateX("+offsetX+")";
-                }else if(offsetX < 0){
-                    document.getElementById(this.id).style.transform = "translateX(-"+offsetX+")";
+                if(this.$props.interactive){
+                    if(offsetX > 180){
+                        this.upvote();
+                    //Handle Swipe Downvote
+                    }else if(offsetX < -180){
+                        this.downvote();
+                    }
                 }
-                
-            
-              /*
-                deltaX = 0;
-                deltaY = 0;
-                offsetX = 0;
-                offsetY = 0;
-                clientX = 0;
-                clientY = 0;
-                this.dragged = false;*/
-            
-            },
+        },
 
             upvote: async function(){
-                reset();
-                console.log("attemping upvote");
-
+                this.reset();
                 var _response = await this.$api.db.answer.update({
                     row:{
                         "aid": [parseInt(this.$props.aid)]
@@ -107,15 +79,13 @@ export default {
                         negative: "false"
                     }
                 },this.$tkn);
-                console.log(_response);
                 if(_response){
                     this.$data.negative = false;
                     this.$data.positive = true;
                 }
             },
             downvote: async function(){
-                reset();
-                console.log("attempting downvote");
+                this.reset();
                 var _response = await this.$api.db.answer.update({
                     row:{
                         "aid": [parseInt(this.$props.aid)]

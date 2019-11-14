@@ -16,7 +16,13 @@
         <h1 class="title">Antworten:</h1>
         <vuescroll>
         <div class="AWScontainer" style="margin-bottom:2em">
-            <Answer v-for="a in answers" :key="a.id" :aid="a.aid" :id="$id(a.aid)" :userid="a.userid" :text="a.text" :pos="a.positive" :neg="a.negative" interactive/> 
+            <Answer v-for="a in answers"
+            :key="a.id"
+            :aid="a.aid" :id="$id(a.aid)" :userid="a.userid"
+            :text="a.text"
+            :pos="a.positive"
+            :neg="a.negative"
+            interactive/> 
         </div>
         </vuescroll>
         </div>
@@ -58,9 +64,7 @@ export default {
                 "qid":this.$props.qid
             },this.$tkn);
             var a = _response.data;
-            console.log(a[i]);
             for(var i = 0; i < a.length; i++){
-                        console.log(a[i]);
                 this.answers.push({
                     "aid":a[i].aid,
                     "userid":a[i].userid,

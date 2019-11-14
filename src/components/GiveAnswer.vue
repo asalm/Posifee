@@ -20,11 +20,7 @@
                 v-model="inputText"
                 minlength="10"
                 maxlength="500"
-<<<<<<< HEAD
-                @submit.prevent="enter()"
-=======
-                @keypress.prevent
->>>>>>> 252871a3be463ab2fcc7e0b46c9b8f2f5e86c5e1
+                @keydown.native.enter="enter($event)"
                 placeholder="Maxlength automatically counts characters">
             </b-input>
             </b-field>
@@ -43,7 +39,6 @@
 </div>
 </template>
 <script>
-import Question from '@/components/Question';
 import vuescroll from 'vuescroll';
 
 export default {
@@ -53,7 +48,6 @@ export default {
         question:String
     },
     components:{
-        Question,
         vuescroll
     },
     data(){
@@ -66,17 +60,16 @@ export default {
     methods:{
         back: function(){
             const self = this
-            staged = false;
-            submitted = false;
+            this.staged = false;
+            this.submitted = false;
             self.$router.go(-1);
         },
-        enter: function(){
-            //e.preventDefaults();
+        enter: function(e){
+            e.preventDefault();
         },
         submit: async function(){
 
             if(this.staged){
-                console.log("ANSWERING TO: ",this.$props.qid);
                 var submission = await this.$api.db.answer.insert({
                 "qID":this.$props.qid,
                 "userID":this.$api.usr.id,
@@ -95,8 +88,6 @@ export default {
     },
     watch: {
         inputText: function(){
-            //es-disable next-line
-            console.log(this.inputText);
         }
     }
 }

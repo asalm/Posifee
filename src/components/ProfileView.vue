@@ -40,7 +40,7 @@
         </div>
         <Answer v-for="a in answers" :key="a.id" :id="$id(a.aid)" :text="a.text" :pos="a.positive" :neg="a.negative" />
         <div class="column is-12">
-            <button class="button">Feedback einreichen...</button>
+            <button class="button" @click="toFeedback()">Feedback einreichen...</button>
         </div>
     </div>
     <!--
@@ -48,19 +48,20 @@
     -->
     </vuescroll>
     <h1 v-else class="title">Läd...</h1>
+     <b-loading :is-full-page="true" :active.sync="loading"></b-loading>
     <!-- BUEFY LOADING -->
 </div>
 </template>
 <script>
 //import Question from '../components/Question.vue'
-import VueApexCharts from 'vue-apexcharts';
+//import VueApexCharts from 'vue-apexcharts';
 import Answer from '@/components/Answer';
 import vuescroll from 'vuescroll';
 
 export default {
   name: 'pView',
   components: {
-      VueApexCharts, Answer, vuescroll
+       Answer, vuescroll //VueApexCharts,
   },
   props:{
       username: String,
@@ -146,7 +147,11 @@ export default {
                 })
             }
             this.loading = false;
-        }
+    },
+    toFeedback: function(){
+        this.$router.push({name:'writefeedback'});
+    }
+
   }
 }
 </script>
