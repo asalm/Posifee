@@ -3,7 +3,7 @@
     <h4 class="bg-graphic">!</h4>
     <vuescroll v-if="!loading">
       <div class="column">
-      <h1 class="title">Antworten</h1>
+      <h1 class="title">Deine Fragen</h1>
         <Question v-for="a in answers" :key="a.id" :id="a.qid" interactive :count="a.count" hasAnswer :text="a.text" class="answer"/>
       </div>
     </vuescroll>

@@ -11,6 +11,9 @@
               <button class="button" @click="interaction">Frage verfassen!</button>
           </div>
         </div>
+        <div v-if="firstUse" class="notification is-warning">
+          Um Posifee im vollen Umfang zu nutzen, stelle am besten Direkt deine erste Frage! Nur so kannst du die Antworten anderer Mitglieder bewerten.  
+        </div>
         <Question v-for="q in questions" :key="q.id" interactive :id="q.qid" :text="q.text" class="question"/>
       </div>
     </vuescroll>
@@ -32,12 +35,14 @@ export default {
     vuescroll
   },
   created(){
+    this.checkUserStatus();
     this.getQuestions();
   },
   data(){
     return {
       questions:[],
-      loading: false
+      loading: false,
+      firstUse: false,
     }
   },
   methods: {
@@ -46,7 +51,20 @@ export default {
 
       this.$router.push({name:'writequestion'});
     },
-    
+    checkUserStatus: async function(){
+      var _response = await this.$api.db.question.get({
+        "userid": parseInt(this.$api.usr.id)
+      },this.$tkn);
+      var q = _response.data;
+      if (q.length > 0){
+        this.firstUse = false;
+        console.log("not the first use");
+      }else{
+        this.firstUse = true;
+        console.log("first use");
+
+      }
+    },
     getQuestions: async function(){
       var that = this;
       this.loading = true;

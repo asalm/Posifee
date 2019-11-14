@@ -6,7 +6,7 @@
                     <router-link to="/q">Fragen</router-link>
                 </div>
                 <div class="level-item has-text-centered has-text-light">
-                    <router-link to="/a">Antworten</router-link>
+                    <router-link to="/a">Deine Fragen</router-link>
                 </div>
                 <div class="level-item has-text-centered has-text-light">
                     <router-link to="/p">Profil</router-link>
