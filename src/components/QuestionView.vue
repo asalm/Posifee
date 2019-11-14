@@ -11,10 +11,10 @@
               <button class="button" @click="interaction">Frage verfassen!</button>
           </div>
         </div>
-        <div v-if="firstUse" class="notification is-warning">
+        <div v-if="firstUse" class="notification question is-warning">
           Um Posifee im vollen Umfang zu nutzen, stelle am besten Direkt deine erste Frage! Nur so kannst du die Antworten anderer Mitglieder bewerten.  
         </div>
-        <Question v-for="q in questions" :key="q.id" interactive :id="q.qid" :text="q.text" class="question"/>
+        <Question v-if="!firstUse" v-for="q in questions" :key="q.id" interactive :id="q.qid" :text="q.text" class="question"/>
       </div>
     </vuescroll>
     <h1 v-else class="title">Läd...</h1>
