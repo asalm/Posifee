@@ -48,6 +48,7 @@
     -->
     </vuescroll>
     <h1 v-else class="title">Läd...</h1>
+    <!-- BUEFY LOADING -->
 </div>
 </template>
 <script>
