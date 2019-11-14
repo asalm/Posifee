@@ -81,7 +81,16 @@ export default {
                     this.submitted = true;
                 }
             }else{
-                this.staged = true;
+                if(this.inputText.length > 10){
+                    this.staged = true;
+                }else{
+                    this.$buefy.toast.open({
+                        duration: 5000,
+                        message: `Deine Antwort sollte mindestens 10 Zeichen beinhalten.`,
+                        position: 'is-bottom',
+                        type: 'is-danger'
+                    })
+                }
             }
             
         }

@@ -58,6 +58,7 @@ export default {
             $event.preventDefault();
         },
         submit: async function(){
+            if(this.inputText.length > 10){
             var submission = await this.$api.db.feedback.insert({
                 "text": this.inputText,
                 "date": new Date.now()
@@ -65,6 +66,14 @@ export default {
 
             if(submission.response === "transmission accepted"){
                 this.submitted = true;
+            }
+            }else{
+                                this.$buefy.toast.open({
+                    duration: 5000,
+                    message: `Dein Feedback sollte mindestens 10 Zeichen beinhalten.`,
+                    position: 'is-bottom',
+                    type: 'is-danger'
+                })
             }
         }
     },

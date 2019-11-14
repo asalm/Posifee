@@ -87,6 +87,7 @@ export default {
         enter: function(){
         },
         submit: async function(){
+            if(this.inputText.length > 10){
             var submission = await this.$api.db.question.insert({
                 "userID": parseInt(this.$api.usr.id),
                 "text": this.inputText
@@ -94,6 +95,14 @@ export default {
 
             if(submission.response === "transmission accepted"){
                 this.submitted = true;
+            }
+            }else{
+                this.$buefy.toast.open({
+                    duration: 5000,
+                    message: `Deine Frage sollte mindestens 10 Zeichen beinhalten.`,
+                    position: 'is-bottom',
+                    type: 'is-danger'
+                })
             }
         }
     },
