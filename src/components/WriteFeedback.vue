@@ -60,7 +60,7 @@ export default {
         submit: async function(){
             var submission = await this.$api.db.feedback.insert({
                 "text": this.inputText,
-                "date": new Date().now()
+                "date": new Date.now()
             }, this.$tkn)
 
             if(submission.response === "transmission accepted"){
