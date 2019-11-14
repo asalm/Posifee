@@ -30,7 +30,7 @@
         </div>
         <div class="container" style="margin-bottom:2em">
             <b-button v-if="!staged" v-on:click="submit()">Antworten</b-button>
-            <b-button v-if="staged" v-on:click="submit()">Abschicken</b-button>
+            <b-button v-if="staged && !submitted" v-on:click="submit()">Abschicken</b-button>
             <b-button v-if="staged && submitted" v-on:click="back()">Zurück</b-button>
         </div>
     </vuescroll>
@@ -84,7 +84,7 @@ export default {
                 if(this.inputText.length > 10){
                     this.staged = true;
                 }else{
-                    this.$buefy.toast.open({
+                    this.$toast.open({
                         duration: 5000,
                         message: `Deine Antwort sollte mindestens 10 Zeichen beinhalten.`,
                         position: 'is-bottom',

@@ -97,7 +97,7 @@ export default {
                 this.submitted = true;
             }
             }else{
-                this.$buefy.toast.open({
+                this.$toast.open({
                     duration: 5000,
                     message: `Deine Frage sollte mindestens 10 Zeichen beinhalten.`,
                     position: 'is-bottom',
