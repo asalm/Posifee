@@ -53,6 +53,7 @@ span {
   color:#363636;
 }
 </style>
+
 <style lang="scss">
 // Import Bulma's core
 @import "~bulma/sass/utilities/_all";

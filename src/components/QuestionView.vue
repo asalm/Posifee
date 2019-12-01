@@ -14,7 +14,10 @@
         <div v-if="firstUse" class="notification question is-warning">
           Um Posifee im vollen Umfang zu nutzen, stelle am besten Direkt deine erste Frage! Nur so kannst du die Antworten anderer Mitglieder bewerten.  
         </div>
-        <Question v-if="!firstUse" v-for="q in questions" :key="q.id" interactive :id="q.qid" :text="q.text" class="question"/>
+        <div v-if="!firstUse">
+        <Question v-for="q in questions" :key="q.id" interactive :id="q.qid" :text="q.text" class="question"/>
+
+        </div>
       </div>
     </vuescroll>
     <h1 v-else class="title">Läd...</h1>
@@ -35,7 +38,7 @@ export default {
     vuescroll
   },
   created(){
-    this.checkUserStatus();
+    //this.checkUserStatus();
     this.getQuestions();
   },
   data(){
@@ -58,10 +61,8 @@ export default {
       var q = _response.data;
       if (q.length > 0){
         this.firstUse = false;
-        console.log("not the first use");
       }else{
         this.firstUse = true;
-        console.log("first use");
 
       }
     },

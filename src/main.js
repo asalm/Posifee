@@ -51,15 +51,31 @@ async function initVue() {
   });
 }
 
+document.addEventListener('reset_user_connect', function (e) {
+
+  // eslint-disable-next-line no-console
+  console.log(e);
+});
+
+document.addEventListener('reset_user_invalid_token', function (e) {
+
+  // eslint-disable-next-line no-console
+  console.log("reset_user_invalid_token ", e);
+  if(e.detail.event.code === "invalid_token"){
+    // eslint-disable-next-line no-console
+    console.log("invalid token ", e.detail);
+}});
 
 function initScript(){
-
   return new Promise(async function(res, rej){
+
     var url = new URL(window.location.href);
+    var usr_tkn = url.searchParams.get("token");
 
     var config = {
-      "host":"https://impact-lab.tools",
-      "user_token": url.searchParams.get("token"),
+      "host":"https://www.impact-lab.tools",
+      "socket_host": "wss://impact-lab.tools",
+      "user_token": usr_tkn,
       "app_token": "ae46dd6cae25683f56985cc96b626cd81664cc76cf9be33975866e587a016603181d1604513edacab5bbe5db0fbf5cb906a911c09076e253aa794073e8ffc4ed",
       "schemaName": "posi"
     };
@@ -68,7 +84,7 @@ function initScript(){
     try{
     await _r.setup();
     }catch(e){
-      rej("Error");
+      rej("Error establishing Conntection to impact-lab.tools!",e);
     }
     
     res(_r);

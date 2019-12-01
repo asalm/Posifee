@@ -21,7 +21,7 @@
                 minlength="10"
                 maxlength="500"
                 @keydown.native.enter="enter($event)"
-                placeholder="Maxlength automatically counts characters">
+                placeholder="Maximal 500 Zeichen.">
             </b-input>
             </b-field>
             <div class="notification is-warning" v-if="staged">

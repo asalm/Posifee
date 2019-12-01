@@ -38,7 +38,7 @@
             </div>
             -->
         </div>
-        <Answer v-for="a in answers" :key="a.id" :id="$id(a.aid)" :text="a.text" :pos="a.positive" :neg="a.negative" />
+        <Answer v-for="a in answers" :key="a.id" :id="$id(a.aid)" :text="a.text" :pos="a.positive" :neg="a.negative" class="aws"/>
         <div class="column is-12">
             <button class="button" @click="toFeedback()">Feedback einreichen...</button>
         </div>
@@ -162,6 +162,9 @@ export default {
 .notification p{
     text-align:justify;
     hyphens: auto;
+}
+.aws {
+    z-index:3000;
 }
 .bg-graphic{
 

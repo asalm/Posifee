@@ -28,7 +28,7 @@
             </div>
         </div>
         <div class="column info-row">
-            <p><i>v0.3</i> - created with <b>❤︎</b> </p>
+            <p><i>v0.4</i> - created with <b>❤︎</b> </p>
         </div>
     </div>
 </section>
