@@ -14,9 +14,8 @@
             </div>-->
             <div class="column is-12">
                 <div class="buttons">
-                        <b-button 
-                            tag="router-link" 
-                            to="/q" 
+                        <b-button
+                            @click="trackLogin"
                             type="is-light" 
                             size="is-large">
                             Beitreten
@@ -66,6 +65,29 @@ export default {
         },
         enter: function(){
             this.$router.push({path:'/q'});
+        },
+        trackLogin: async function(){
+            var today = new Date();
+            var date  = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+            var time = today.getHours() + ":" + today.getMinutes();
+
+            console.log(this.$api.usr.id + " logged in at " + time + "/" + date);
+            /*
+            var submission = await this.$api.db.login.insert({
+                "userid":this.$api.usr.id,
+                "date": date,
+                "time": time,
+            },this.$tkn);
+            
+            console.log(submission.response);
+            
+            if(submission.response === "transmission accepted"){
+                this.enter();
+            }else{
+                this.enter();
+            }
+            */
+           this.enter();
         }
     }
 }

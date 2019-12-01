@@ -2,7 +2,7 @@
 <div class="container">
     <div class="notification">
     <p>{{ text }}</p>
-    <button v-if="interactive" class="reply" @click="interaction">
+    <button v-if="interactive" class="reply" @click="interaction" title="Antwort verfassen">
         <h1 class="title" v-if="hasAnswer">{{ answers }}</h1>
         <font-awesome-icon v-else icon="reply"/></button>
 

@@ -3,7 +3,7 @@
 
 <nav class="navbar is-dark" role="navigation" aria-label="main navigation">
   <div class="navbar-brand ">
-    <a class="navbar-item" href="https://www.impact-lab.tools">
+    <a class="navbar-item" href="https://www.impact-lab.tools" title="zurück">
       <span class="icon has-text-light">
                     <i class="fas fa-home" aria-hidden="true" ></i>
                   </span>
@@ -14,6 +14,8 @@
       <span aria-hidden="true"></span>
       <span aria-hidden="true"></span>
     </a>
+    <h1 class="navbar-item"><b>posifee</b></h1>
+
   </div>
   <div class="navbar-item has-text-light">
     <h4> Eingeloggt als {{$api.usr.nickname || $api.usr.username}}.</h4>
@@ -82,6 +84,7 @@ $colors: (
 $link: $primary;
 $link-invert: $primary-invert;
 $link-focus-border: $primary;
+$input-focus-border: $primary;
 
 // Import Bulma and Buefy styles
 @import "~bulma";
