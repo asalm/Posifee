@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import App from './App.vue';
+import EaL from './Eal.vue';
 import Buefy from 'buefy';
 import VueApexCharts from 'vue-apexcharts';
 import VueModalTor from 'vue-modaltor';
@@ -48,7 +49,15 @@ async function initVue() {
       router,
       render: h => h(App)
     }).$mount('#app')
-  });
+  }, function(){
+    //on rejected!
+    // eslint-disable-next-line no-console
+    console.log("I dont have a token :((( ");
+    new Vue({
+      render: h => h(EaL)
+      }).$mount('#app')
+    });
+  
 }
 
 document.addEventListener('reset_user_connect', function (e) {
@@ -84,7 +93,7 @@ function initScript(){
     try{
     await _r.setup();
     }catch(e){
-      rej("Error establishing Conntection to impact-lab.tools!",e);
+      rej("Error establishing Connection to impact-lab.tools!",e);
     }
     
     res(_r);

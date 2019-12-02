@@ -8,22 +8,28 @@
         <i class="fas fa-home" aria-hidden="true" ></i>
       </span>
     </a>
-
-  </div>
-  <div class="navbar-menu">
-    <div class="navbar-start">
     <div class="navbar-item">
       <h1 class="is-hidden-mobile"><b>posifee</b></h1>
     </div>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-start">
+
     </div>
     <div class="navbar-end">
       <div class="navbar-item has-text-light">
-        <h4> Eingeloggt als {{$api.usr.nickname || $api.usr.username}}.</h4>
+        <h4> Nicht eingeloggt!</h4>
       </div>
     </div>
   </div>
   
 </nav>
+<div id="app">
+<h1>Sie besitzen kein User-Token!</h1>
+
+</div>
+</div>
+    <!--
 
      <div id="app">
     <transition>
@@ -31,6 +37,7 @@
     </transition>
     </div>
     </div>
+    -->
 </template>
 
 <script>
@@ -42,10 +49,6 @@ export default {
 </script>
 
 <style>
-body{
-  overflow-y:hidden;
-}
-
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -92,9 +95,6 @@ $link: $primary;
 $link-invert: $primary-invert;
 $link-focus-border: $primary;
 $input-focus-border: $primary;
-$tabs-link-hover-color: $warning;
-$tabs-link-active-color: $primary;
-$tabs-link-color: $black;
 
 // Import Bulma and Buefy styles
 @import "~bulma";

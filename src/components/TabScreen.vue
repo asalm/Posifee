@@ -66,6 +66,7 @@ li{
 .app{
     max-width:36em;
     max-height:58em;
+    overflow-y:hidden;
 }
 .body {
     overflow-y:hidden;
@@ -73,6 +74,9 @@ li{
     display:flex;
     align-items:center;
 
+}
+body{
+  overflow-y:hidden;
 }
 b-tabs{
     /*transform:translateY(4em);*/

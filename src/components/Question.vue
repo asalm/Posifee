@@ -1,8 +1,8 @@
 <template>
 <div class="container">
-    <div class="notification">
+    <div class="notification" ref="ctn">
     <p>{{ text }}</p>
-    <button v-if="interactive" class="reply" @click="interaction" title="Antwort verfassen">
+    <button v-if="interactive" class="reply" @click="interaction" title="Antwort verfassen" ref="btn">
         <h1 class="title" v-if="hasAnswer">{{ answers }}</h1>
         <font-awesome-icon v-else icon="reply"/></button>
 
@@ -30,13 +30,17 @@ export default {
         open:false
         };
     },
-    computed: {
-        numAnswers: function() {
-            var num;
+    mounted(){
 
-            num = Math.floor(Math.random() * Math.floor(99));
-            return num;
-        }
+        // style purpose
+        var that = this;
+        this.$refs['btn'].addEventListener('mouseover',function(e){
+            that.$refs['ctn'].classList.add('is-hover');
+        });
+        this.$refs['btn'].addEventListener('mouseout',function(e){
+            that.$refs['ctn'].classList.remove('is-hover');
+        });
+        
     },
     methods: {
         hideModal() {
@@ -88,7 +92,7 @@ export default {
 }
 .notification:hover{
     box-shadow:0px 3px 9px 2px rgba(0,0,0,0.3);
-    transition: all 0.8s;
+    transition: all 0.3s;
 }
 
 .notification p{
@@ -110,8 +114,12 @@ color:black;
 }
 
 .notification .reply:hover{
-    background-color:greenyellow;
-    color:grey;
+    background-color:hsl(141, 71%, 48%);
+    color:white;
+}
+
+.notification.is-hover{
+    background-color:rgb(220, 220, 220);
 }
 
 .notification .title{

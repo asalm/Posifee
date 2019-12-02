@@ -7,9 +7,9 @@
     <div class="column">
         <div class="level">
             <div class="level-left">
-                <h1 class="title">Profil</h1>
+                <h1 class="title">Profil<span class="is-hidden-tablet"> von {{nickname}}</span></h1>
             </div>
-            <div class="level-right">
+            <div class="level-right is-hidden-mobile">
                 <h1 class="title has-text-right">{{nickname}}</h1>
             </div>
         </div>
@@ -53,15 +53,13 @@
 </div>
 </template>
 <script>
-//import Question from '../components/Question.vue'
-//import VueApexCharts from 'vue-apexcharts';
 import Answer from '@/components/Answer';
 import vuescroll from 'vuescroll';
 
 export default {
   name: 'pView',
   components: {
-       Answer, vuescroll //VueApexCharts,
+       Answer, vuescroll
   },
   props:{
       username: String,
@@ -70,33 +68,6 @@ export default {
       return{
       answers:[],
       loading: false,
-      //series: [3,7], //percentbased
-      //total: '100',
-      chartOptions: {
-          plotOptions:{
-              radialBar: {
-                  dataLabels: {
-                      name: {
-                          fontSize: "22px", 
-                      },
-                      value: {
-                          fontSize: '16px',
-                      },
-                      total: {
-                          show: false,
-                          label: 'Gesamt',
-                          
-                        formatter: function (w) {
-                    return w.globals.seriesTotals.reduce((a, b) => {
-                      return a + b
-                    }, 0) / w.globals.series.length + '%'
-                  }
-                      }
-                  }
-              }
-          },
-          labels: ['Gute Antworten','Schlechte Antworten'],
-      },
       pos:0,
       neg:0,
       nickname:this.$api.usr.nickname
@@ -106,18 +77,6 @@ export default {
       total: function(){
           return parseInt(this.answers.length);
       },
-      series: function(){
-          const seriesarray = new Array();
-              var total = 100;
-              var good = Math.floor(Math.random() * Math.floor(100))
-              var bad = total - good;
-
-        seriesarray.push(good);
-        seriesarray.push(bad);
-          
-
-          return seriesarray;
-      }
   },
   created(){
       this.getAnswers();
