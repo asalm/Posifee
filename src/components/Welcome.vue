@@ -72,7 +72,7 @@ export default {
             var time = today.getHours() + ":" + today.getMinutes();
 
             console.log(this.$api.usr.id + " logged in at " + time + "/" + date);
-            /*
+            
             var submission = await this.$api.db.login.insert({
                 "userid":this.$api.usr.id,
                 "date": date,
@@ -82,11 +82,12 @@ export default {
             console.log(submission.response);
             
             if(submission.response === "transmission accepted"){
+                console.log("login tracked");
                 this.enter();
             }else{
                 this.enter();
             }
-            */
+            
            this.enter();
         }
     }
