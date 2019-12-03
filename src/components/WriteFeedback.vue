@@ -60,14 +60,23 @@ export default {
         submit: async function(){
             if(this.inputText.length > 10){
                 // eslint-disable-next-line
+                
                 console.log("text contains " + this.inputText.length + " characters");
+                var today = new Date();
+                var currentDate = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
                 var submission = await this.$api.db.feedback.insert({
                     "text": this.inputText,
-                    //"date": Date.now()
+                    "date": currentDate,
                 }, this.$tkn)
 
                 if(submission.response === "transmission accepted"){
                     this.submitted = true;
+                    this.$toast.open({
+                        duration: 5000,
+                        message: 'Dein Feedback wurde eingereicht!',
+                        position: 'is-bottom',
+                        type:'is-success'
+                    });
                 }
             }else{
                 this.$toast.open({
