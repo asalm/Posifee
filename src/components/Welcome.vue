@@ -71,8 +71,9 @@ export default {
             var date  = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
             var time = today.getHours() + ":" + today.getMinutes();
 
+            //if minutes < 01 = minutes = 0 -> Server Error weil expected 00
             console.log(this.$api.usr.id + " logged in at " + time + "/" + date);
-            
+            console.log(this.$api);
             var submission = await this.$api.db.login.insert({
                 "userid":this.$api.usr.id,
                 "date": date,
