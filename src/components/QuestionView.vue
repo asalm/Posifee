@@ -3,6 +3,9 @@
     <h4 class="bg-graphic">?</h4>
     <vuescroll v-if="!loading">
       <div class="column">
+        <devNote v-on:no-scroll="noscroll"></devNote>
+      </div>
+      <div class="column" id="timeline">
         <div class="level">
           <div class="level-left">
               <h1 class="title">Fragen</h1>
@@ -30,12 +33,14 @@
 <script>
 import Question from '../components/Question.vue'
 import vuescroll from 'vuescroll';
+import devNote from '../components/components/DevNote.vue';
 
 export default {
   name: 'qView',
   components: {
     Question,
-    vuescroll
+    vuescroll,
+    devNote
   },
   created(){
     //this.checkUserStatus();
@@ -46,6 +51,7 @@ export default {
       questions:[],
       loading: false,
       firstUse: false,
+      noscroll_var: false
     }
   },
   methods: {
@@ -83,6 +89,18 @@ export default {
         });
       }
       this.loading = false;
+    },
+    noscroll: function(){
+      if(this.noscroll_var){
+                document.getElementById("timeline").setAttribute('style','overflowY = ""');
+                //document.body.style.paddingRight = "0";
+                this.noscroll_var = false
+            }else{
+                document.getElementById("timeline").setAttribute('style', 'overflow-y: hidden !important');
+                //document.body.style.paddingRight = "17px";
+                //this.$emit('no-scroll');
+                this.noscroll_var = true
+            }
     }
   }
 }

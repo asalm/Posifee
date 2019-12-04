@@ -13,9 +13,10 @@
                 </div>
         </nav>
     </section>
-    <section style="margin-bottom:6em" class="has-text-dark list">
+    <section style="margin-bottom:2em" class="has-text-dark list">
             <router-view></router-view>
     </section>
+    <!-- Scroll to Top -->
 </div>
 </template>
 <script>
@@ -24,6 +25,7 @@ import QuestionView from '../components/QuestionView.vue';
 import AnswerView from '../components/AnswerView.vue';
 import ProfileView from '../components/ProfileView.vue';
 */
+
 export default {
   name: 'TabScreen',
 }

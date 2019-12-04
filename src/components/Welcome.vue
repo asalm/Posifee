@@ -27,7 +27,7 @@
             </div>
         </div>
         <div class="column info-row">
-            <p><i>v0.4</i> - created with <b>❤︎</b> </p>
+            <p><i>v0.5</i> - created with <b>❤︎</b> </p>
         </div>
     </div>
 </section>
@@ -69,7 +69,7 @@ export default {
         trackLogin: async function(){
             var today = new Date();
             var date  = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-            var time = today.getHours() + ":" + today.getMinutes();
+            var time = today.getHours() + ("0" + today.getMinutes()).slice(-2);
 
             //if minutes < 01 = minutes = 0 -> Server Error weil expected 00
             console.log(this.$api.usr.id + " logged in at " + time + "/" + date);

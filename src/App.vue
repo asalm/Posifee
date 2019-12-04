@@ -1,6 +1,6 @@
 <template>
 <div>
-
+<div v-if="$api.usr === 'undefined'"  ref="loginPanel" id="loginModal"></div>
 <nav class="navbar is-dark" role="navigation" aria-label="main navigation">
   <div class="navbar-brand ">
     <a class="navbar-item" href="https://www.impact-lab.tools" title="zurück">
@@ -25,7 +25,7 @@
   
 </nav>
 
-     <div id="app">
+     <div v-if="typeof($api.usr) === 'object'" id="app">
     <transition>
     <router-view/>
     </transition>
@@ -37,6 +37,9 @@
 
 export default {
   name: 'app',
+  mounted: function(){
+    (this.$api.usr === 'undefined') ? this.$refs.loginPanel.appendChild(this.$api.uiModal) : {};
+  }
 
 }
 </script>
