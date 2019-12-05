@@ -64,6 +64,7 @@ export default {
             this.$refs.infoModal.toggleVisibility(); 
         },
         enter: function(){
+            window.devNoteRead = false;
             this.$router.push({path:'/q'});
         },
         trackLogin: async function(){

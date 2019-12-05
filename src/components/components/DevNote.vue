@@ -35,7 +35,6 @@ export default {
         this.getData().then(function(){
             if(that.devnote.length > 0){
                 console.log("data found!");
-            that.noscroll();
             that.toggle();
             }else{
                 console.log("no data found");
@@ -51,8 +50,12 @@ export default {
             this.devnote = _response.data[0].text.toString()
         },
         toggle: function(){
+            if(!window.devNoteRead){
             this.visible = !this.visible;
             this.noscroll();
+            if(!this.visible){
+                window.devNoteRead = true;
+            }}
         },
         noscroll: function(){
             if(this.noscroll_var){
@@ -74,7 +77,7 @@ export default {
 <style scoped>
 .notification{
     z-index:3000;
-    min-height:80vh;
+    min-height:78vh;
     padding-right:0.5em;
 }
 

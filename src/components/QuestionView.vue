@@ -3,7 +3,7 @@
     <h4 class="bg-graphic">?</h4>
     <vuescroll v-if="!loading">
       <div class="column">
-        <devNote v-on:no-scroll="noscroll"></devNote>
+        <devNote v-on:no-scroll="noscroll" v-if="!DevNoteRead"></devNote>
       </div>
       <div class="column" id="timeline">
         <div class="level">
@@ -51,7 +51,8 @@ export default {
       questions:[],
       loading: false,
       firstUse: false,
-      noscroll_var: false
+      noscroll_var: false,
+      devNoteRead: window.devNoteRead
     }
   },
   methods: {
@@ -91,8 +92,9 @@ export default {
       this.loading = false;
     },
     noscroll: function(){
+      console.log("noscroll triggered");
       if(this.noscroll_var){
-                document.getElementById("timeline").setAttribute('style','overflowY = ""');
+                document.getElementById("timeline").setAttribute('style','overflowY = visible !important');
                 //document.body.style.paddingRight = "0";
                 this.noscroll_var = false
             }else{

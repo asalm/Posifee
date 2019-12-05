@@ -205,6 +205,7 @@ user-select: none;
 .column{
   z-index:8;
   max-height:40em !important;
+  padding-bottom:6em;
 }
 .column:nth-last-child(){
       padding-bottom:6em;
