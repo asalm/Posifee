@@ -36,8 +36,7 @@ Vue.use(VueModalTor);
 Vue.use(VDragged);
 Vue.use(UniqueId);
 
-//Default Routing to Login!
-router.replace('/login');
+
 
 var _vue;
 var url = new URL(window.location.href);
@@ -62,7 +61,8 @@ document.addEventListener('reset_user_connect', function (e) {
 
       _mainApp.style.display = 'block';
       _mainLogin.style.display = "none";
-
+      //Default Routing to Login!
+      router.replace('/login');
       usr_tkn = e.detail.user.token;
       _vue.$api.usr = e.detail.user;
       initVue();
