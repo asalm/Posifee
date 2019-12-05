@@ -64,8 +64,9 @@ document.addEventListener('reset_user_connect', function (e) {
       _mainLogin.style.display = "none";
 
       usr_tkn = e.detail.user.token;
+      _vue.$api.usr = e.detail.user;
       initVue();
-      // _vue.$dbConnector.usr = e.detail.user;
+      // 
 
 
   }else{

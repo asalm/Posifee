@@ -1,6 +1,6 @@
 <template>
 <div>
-<div v-if="$api.usr === 'undefined'"  ref="loginPanel" id="loginModal"></div>
+<div v-if="this.$api.usr === 'undefined'"  ref="loginPanel" id="loginModal"></div>
 <nav class="navbar is-dark" role="navigation" aria-label="main navigation">
   <div class="navbar-brand ">
     <a class="navbar-item" href="https://www.impact-lab.tools" title="zurück">
