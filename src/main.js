@@ -64,7 +64,7 @@ document.addEventListener('reset_user_connect', function (e) {
       _mainLogin.style.display = "none";
       //Default Routing to Login!
       usr_tkn = e.detail.user.token;
-      _vue.$api.usr = e.detail.user;
+      Vue.prototype.$api.usr = e.detail.user;
       initVue();
       // 
 
@@ -72,7 +72,7 @@ document.addEventListener('reset_user_connect', function (e) {
   }else{
       _mainApp.style.display = 'none';
       _mainLogin.style.display = "block";
-      _vue.$api.usr = "undefined";
+      Vue.prototype.$api.usr = "undefined";
       // alert(e.detail.user.message);
   }
 
