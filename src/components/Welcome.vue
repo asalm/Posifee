@@ -20,14 +20,16 @@
                             size="is-large">
                             Beitreten
                         </b-button>
+                    <!--
                     <b-button type="is-light" size="is-large" @click="toggleInfoModal">
                         info
                     </b-button>
+                    -->
                 </div>
             </div>
         </div>
         <div class="column info-row">
-            <p><i>v0.5</i> - created with <b>❤︎</b> </p>
+            <p><i>v0.5.2</i> - created with <b>❤︎</b> </p>
         </div>
     </div>
 </section>
