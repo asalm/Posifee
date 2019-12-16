@@ -112,6 +112,16 @@ export default {
     },
     toFeedback: function(){
         this.$router.push({name:'writefeedback'});
+    },
+    toOptions: function(){
+        this.$toast.open({
+            duration: 5000,
+            message: `Momentan sind Optionen nicht verfügbar.`,
+            position: 'is-bottom',
+            type: 'is-warning'
+        });
+        //this.$router.push({name:'options'});
+
     }
 
   }
