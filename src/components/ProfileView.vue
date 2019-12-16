@@ -40,7 +40,10 @@
         </div>
         <Answer v-for="a in answers" :key="a.id" :id="$id(a.aid)" :text="a.text" :pos="a.positive" :neg="a.negative" class="aws"/>
         <div class="column is-12">
-            <button class="button" @click="toFeedback()">Feedback einreichen...</button>
+            <div class="buttons is-fullwidth">
+            <button class="button is-success is-fullwidth" @click="toFeedback()"><b>Feedback</b></button>
+            <button class="button is-info is-fullwidth"><b>Optionen</b></button>
+            </div>
         </div>
     </div>
     <!--

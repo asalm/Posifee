@@ -95,12 +95,9 @@ export default {
       console.log("noscroll triggered");
       if(this.noscroll_var){
                 document.getElementById("timeline").setAttribute('style','overflowY = visible !important');
-                //document.body.style.paddingRight = "0";
                 this.noscroll_var = false
             }else{
                 document.getElementById("timeline").setAttribute('style', 'overflow-y: hidden !important');
-                //document.body.style.paddingRight = "17px";
-                //this.$emit('no-scroll');
                 this.noscroll_var = true
             }
     }

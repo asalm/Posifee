@@ -9,6 +9,7 @@ import GiveAnswer from '@/components/GiveAnswer';
 import ReadAnswer from '@/components/ReadAnswer';
 import WriteQuestion from '@/components/WriteQuestion';
 import WriteFeedback from '@/components/WriteFeedback';
+import OptionsView from '@/components/OptionsView';
 
 Vue.use(Router);
 
@@ -18,6 +19,10 @@ export default new Router({
       path:'/login',
       name:'login',
       component: Welcome
+    },{
+      path: '/options',
+      name: 'options',
+      component: OptionsView
     },
     {
       path:'/',

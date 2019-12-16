@@ -60,12 +60,10 @@ export default {
         noscroll: function(){
             if(this.noscroll_var){
                 document.getElementsByTagName("html")[0].style.overflowY = "";
-                //document.body.style.paddingRight = "0";
                 this.$emit('no-scroll');
                 this.noscroll_var = false
             }else{
                 document.getElementsByTagName("html")[0].setAttribute('style', 'overflow-y: hidden !important');
-                //document.body.style.paddingRight = "17px";
                 this.$emit('no-scroll');
                 this.noscroll_var = true
             }
