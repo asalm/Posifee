@@ -1,16 +1,16 @@
 import Vue from 'vue';
 import App from './App.vue';
 import Buefy from 'buefy';
-import VueApexCharts from 'vue-apexcharts';
 import VueModalTor from 'vue-modaltor';
 import VDragged from 'v-dragged';
 import UniqueId from 'vue-unique-id';
 import vuescroll from 'vuescroll';
 import router from './router';
+import VueTour from 'vue-tour';
+require('vue-tour/dist/vue-tour.css');
 
 import './../node_modules/bulma/css/bulma.css';
 import './../node_modules/bulma-divider/dist/css/bulma-divider.min.css';
-
 import 'buefy/dist/buefy.css';
 
 import {library} from '@fortawesome/fontawesome-svg-core';
@@ -22,7 +22,6 @@ import {faArrowLeft} from '@fortawesome/free-solid-svg-icons';
 library.add(faReply,faArrowLeft);
 
 Vue.component('font-awesome-icon', FontAwesomeIcon);
-Vue.component('apexchart', VueApexCharts);
 Vue.config.productionTip = false
 
 Vue.use(vuescroll, {
@@ -35,11 +34,12 @@ Vue.use(Buefy);
 Vue.use(VueModalTor);
 Vue.use(VDragged);
 Vue.use(UniqueId);
+Vue.use(VueTour);
 
 router.replace('/login');
 
 
-var _vue;
+var _vm;
 var url = new URL(window.location.href);
 var usr_tkn = url.searchParams.get("token");
 
@@ -57,7 +57,7 @@ document.addEventListener('reset_user_connect', function (e) {
       // var _appMain = document.createElement('div');
       // _appMain.id = 'appMain';
       // document.body.appendChild(_appMain);
-      // _vue.$destroy();
+      //_vm.$destroy();
       // console.log(e.detail.user);
 
       _mainApp.style.display = 'block';
@@ -72,7 +72,7 @@ document.addEventListener('reset_user_connect', function (e) {
   }else{
       _mainApp.style.display = 'none';
       _mainLogin.style.display = "block";
-      Vue.prototype.$api.usr = "undefined";
+      _vm.prototype.$api.usr = "undefined";
       // alert(e.detail.user.message);
   }
 
@@ -107,7 +107,7 @@ async function initVue() {
     Vue.prototype.$api = r;
     Vue.prototype.$tkn = "ae46dd6cae25683f56985cc96b626cd81664cc76cf9be33975866e587a016603181d1604513edacab5bbe5db0fbf5cb906a911c09076e253aa794073e8ffc4ed"
 
-    _vue = new Vue({
+    _vm = new Vue({
       router,
       render: h => h(App)
     }).$mount('#app')

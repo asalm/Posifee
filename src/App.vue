@@ -24,13 +24,10 @@
   
 </nav>
 
-     <div v-if="typeof($api.usr) === 'object'" id="app">
+     <div id="app">
     <transition>
     <router-view/>
     </transition>
-    </div>
-    <div ref="loginPanel">
-      
     </div>
     </div>
 </template>
@@ -39,9 +36,7 @@
 
 export default {
   name: 'app',
-  mounted: function(){
-    (this.$api.usr === 'undefined') ? this.$refs.loginPanel.appendChild(this.$api.uiModal) : {};
-  }
+ 
 
 }
 </script>

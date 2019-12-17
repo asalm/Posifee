@@ -2,13 +2,13 @@
 <div class="container app">
     <section>
         <nav class="navbar is-fixed-bottom level is-mobile"><!-- class="is-fixed-bottom"-->
-            <div class="level-item has-text-centered has-text-light">
+            <div class="level-item has-text-centered has-text-light" data-v-step="0">
                     <router-link to="/q">Fragen</router-link>
                 </div>
-                <div class="level-item has-text-centered has-text-light">
+                <div class="level-item has-text-centered has-text-light" data-v-step="1">
                     <router-link to="/a">Deine Fragen</router-link>
                 </div>
-                <div class="level-item has-text-centered has-text-light">
+                <div class="level-item has-text-centered has-text-light" data-v-step="2">
                     <router-link to="/p">Profil</router-link>
                 </div>
         </nav>
@@ -16,6 +16,8 @@
     <section style="margin-bottom:2em" class="has-text-dark list">
             <router-view></router-view>
     </section>
+        <v-tour name="myTour" :steps="steps" :options="myOptions"></v-tour>
+
     <!-- Scroll to Top -->
 </div>
 </template>
@@ -28,9 +30,70 @@ import ProfileView from '../components/ProfileView.vue';
 
 export default {
   name: 'TabScreen',
+  data(){
+      return {
+          myCallbacks: {
+              onStop: this.cancelTour
+          },
+          myOptions: {
+          useKeyboardNavigation: false,
+          labels: {
+            buttonSkip: 'Überspringen',
+            buttonPrevious: 'Zurück',
+            buttonNext: 'Weiter',
+            buttonStop: 'Ende'
+          }
+        },
+          steps: [
+          {
+            target: '[data-v-step="0"]',
+            content: 'Antworte auf die Fragen anderer!'
+          },
+          {
+            target: '[data-v-step="1"]',
+            content: 'Schau dir antworten zu deinen Fragen an.',
+            params: {
+              placement: 'top'
+            }
+          },
+          {
+              target: '[data-v-step="2"]',
+              content: 'Hier kannst du sehen, wie deine Antworten bewertet werden.',
+              params: {
+                  placement: 'top'
+              }
+          }
+        ],
+      }
+  },
+  mounted: function(){
+    this.doTour().then(function(r){
+        if(r){
+            this.$tours['myTour'].start();
+        }
+    })
+
+  },
+  methods: {
+      doTour: async function(){
+        var hasLoggedIn = await this.$api.db.login.get({
+             "userid": parseInt(this.$api.usr.id)
+        },this.$tkn);
+        if(hasLoggedIn.data.length > 1){
+            return false;
+        }else{
+            return true;
+        }
+      }
+  }
 }
 </script>
 <style scoped>
+.v-step{
+    z-index:3000;
+    /*overflow: visible;*/
+}
+
 nav.tabs.is-toggle.is-fullwith {
     background-color:blueviolet;
     position:fixed;
@@ -39,9 +102,11 @@ nav.tabs.is-toggle.is-fullwith {
 li{
     margin-left:2px;
 }
+
 .container{
     overflow:hidden;
 }
+
 @media only screen and (max-height:899px){
     .list{
         transform:translateY(0em);

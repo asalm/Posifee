@@ -1,7 +1,8 @@
 <template>
 <section class="bg">
+    <div class="container" ref="loginPanel">
     <niceModal v-bind:text='dstext' title="Datenschutz" ref="infoModal"/>
-    <div class="container">
+    <div class="container" v-if="typeof($api.usr) === 'object'">
         <div class="column title-row">
             <h1 class="title"><b>posi</b>fee</h1>
             <h3 class="subtitle"><i>"das etwas andere soziale Netzwerk"</i></h3>
@@ -17,7 +18,8 @@
                         <b-button
                             @click="trackLogin"
                             type="is-light" 
-                            size="is-large">
+                            size="is-large"
+                            data-v-tour="0">
                             Beitreten
                         </b-button>
                     <!--
@@ -29,8 +31,10 @@
             </div>
         </div>
         <div class="column info-row">
-            <p><i>v0.5.2</i> - created with <b>❤︎</b> </p>
+            <p><i>v0.5.4</i> - created with <b>❤︎</b> </p>
         </div>
+    </div>
+
     </div>
 </section>
 </template>
@@ -44,23 +48,18 @@ export default {
     },
     data(){
         return {
+            
             dstext: 'Im Posifee Netzwerk wird dein Nutzer anhand eines bei dir hinterlegtem Schlüssels authentifiziert. Ist der Schlüssel gelöscht, kannst auch du nicht mehr auf deine Nutzerinformationen zugreifen. Es werden nirgendwo Namen festgehalten oder ähnliches.'
         }
     },
     props: {
         text: String
     },
-    mounted(){
-        /*
-            window.addEventListener('keyup',function(event){
-            event.preventDefault();
-            if(event.keyCode === 13){
-                
-                window.removeEventListener('keyup',false);
+    mounted: function(){
+        (this.$api.usr === 'undefined') ? this.$refs.loginPanel.appendChild(this.$api.uiModal) : {};
 
-            }
-        }.bind(this)); */
     },
+    
     methods: {
         toggleInfoModal:function(){
             this.$refs.infoModal.toggleVisibility(); 
@@ -74,25 +73,22 @@ export default {
             var date  = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
             var time = today.getHours() + ("0" + today.getMinutes()).slice(-2);
 
-            //if minutes < 01 = minutes = 0 -> Server Error weil expected 00
-            console.log(this.$api.usr.id + " logged in at " + time + "/" + date);
-            console.log(this.$api);
             var submission = await this.$api.db.login.insert({
                 "userid":this.$api.usr.id,
                 "date": date,
                 "time": time,
             },this.$tkn);
-            
-            console.log(submission.response);
-            
+    
             if(submission.response === "transmission accepted"){
-                console.log("login tracked");
                 this.enter();
             }else{
-                this.enter();
+                this.$toast.open({
+                        duration: 5000,
+                        message: `Beim Anmelden ist etwas schief gelaufen, probier es bitte erneut!.`,
+                        position: 'is-bottom',
+                        type: 'is-danger'
+                    })
             }
-            
-           this.enter();
         }
     }
 }

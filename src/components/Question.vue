@@ -31,13 +31,14 @@ export default {
         };
     },
     mounted(){
-
         // style purpose
         var that = this;
         this.$refs['btn'].addEventListener('mouseover',function(e){
+            e.preventDefault();
             that.$refs['ctn'].classList.add('is-hover');
         });
         this.$refs['btn'].addEventListener('mouseout',function(e){
+            e.preventDefault();
             that.$refs['ctn'].classList.remove('is-hover');
         });
         

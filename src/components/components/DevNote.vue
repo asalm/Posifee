@@ -34,9 +34,11 @@ export default {
         var that = this;
         this.getData().then(function(){
             if(that.devnote.length > 0){
+                // eslint-disable-next-line no-console
                 console.log("data found!");
             that.toggle();
             }else{
+                // eslint-disable-next-line no-console
                 console.log("no data found");
             }
         });
@@ -50,11 +52,11 @@ export default {
             this.devnote = _response.data[0].text.toString()
         },
         toggle: function(){
-            if(!window.devNoteRead){
+            if(!window._devNote){
             this.visible = !this.visible;
             this.noscroll();
             if(!this.visible){
-                window.devNoteRead = true;
+                window._devNote = true;
             }}
         },
         noscroll: function(){

@@ -42,7 +42,7 @@
         <div class="column is-12">
             <div class="buttons is-fullwidth">
             <button class="button is-success is-fullwidth" @click="toFeedback()"><b>Feedback</b></button>
-            <button class="button is-info is-fullwidth"><b>Optionen</b></button>
+            <button class="button is-info is-fullwidth" @click="toOptions()"><b>Optionen</b></button>
             </div>
         </div>
     </div>

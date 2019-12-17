@@ -3,7 +3,7 @@
     <h4 class="bg-graphic">?</h4>
     <vuescroll v-if="!loading">
       <div class="column">
-        <devNote v-on:no-scroll="noscroll" v-if="!DevNoteRead"></devNote>
+        <devNote v-on:no-scroll="noscroll" v-if="!devNoteRead"></devNote>
       </div>
       <div class="column" id="timeline">
         <div class="level">
@@ -24,10 +24,8 @@
       </div>
     </vuescroll>
     <h1 v-else class="title">Läd...</h1>
-         <b-loading :is-full-page="true" :active.sync="loading"></b-loading>
-
-  </div>
-
+      <b-loading :is-full-page="true" :active.sync="loading"></b-loading>
+    </div>
 </template>
 
 <script>
@@ -46,13 +44,16 @@ export default {
     //this.checkUserStatus();
     this.getQuestions();
   },
+  mounted(){
+    this.checkUserStatus();
+  },
   data(){
     return {
       questions:[],
       loading: false,
       firstUse: false,
       noscroll_var: false,
-      devNoteRead: window.devNoteRead
+      devNoteRead: false,
     }
   },
   methods: {
@@ -62,15 +63,19 @@ export default {
       this.$router.push({name:'writequestion'});
     },
     checkUserStatus: async function(){
+      if(window._devNote){
+        this.devNoteRead = true;
+      }
       var _response = await this.$api.db.question.get({
         "userid": parseInt(this.$api.usr.id)
       },this.$tkn);
       var q = _response.data;
+      // eslint-disable-next-line no-console
+      console.log("q",q.length);
       if (q.length > 0){
         this.firstUse = false;
       }else{
         this.firstUse = true;
-
       }
     },
     getQuestions: async function(){
@@ -92,7 +97,7 @@ export default {
       this.loading = false;
     },
     noscroll: function(){
-      console.log("noscroll triggered");
+      //console.log("noscroll triggered");
       if(this.noscroll_var){
                 document.getElementById("timeline").setAttribute('style','overflowY = visible !important');
                 this.noscroll_var = false
@@ -169,9 +174,10 @@ user-select: none;
 .container{
       transition:all 0.8s;
 }
-
+/*
 @media only screen and (max-height:899px){
   .container{
   }
 }
+*/
 </style>
