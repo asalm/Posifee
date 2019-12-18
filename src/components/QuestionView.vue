@@ -72,6 +72,7 @@ export default {
       var q = _response.data;
       if (q.length > 0){
         this.firstUse = false;
+        //second tour!
       }else{
         this.firstUse = true;
       }

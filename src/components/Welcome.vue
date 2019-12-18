@@ -1,7 +1,7 @@
 <template>
 <section class="bg">
     <div class="container" ref="loginPanel">
-    <niceModal v-bind:text='dstext' title="Datenschutz" ref="infoModal"/>
+    <!--<niceModal v-bind:text='dstext' title="Datenschutz" ref="infoModal"/>-->
     <div class="container" v-if="typeof($api.usr) === 'object'">
         <div class="column title-row">
             <h1 class="title"><b>posi</b>fee</h1>
@@ -22,16 +22,16 @@
                             data-v-tour="0">
                             Beitreten
                         </b-button>
-                    <!--
-                    <b-button type="is-light" size="is-large" @click="toggleInfoModal">
+                    
+                    <b-button type="is-light" size="is-large" disabled>
                         info
                     </b-button>
-                    -->
+                    
                 </div>
             </div>
         </div>
         <div class="column info-row">
-            <p><i>v0.5.6</i> - created with <b>❤︎</b> </p>
+            <p><i>v0.5.7</i> - created with <b>❤︎</b> </p>
         </div>
     </div>
 
@@ -39,12 +39,12 @@
 </section>
 </template>
 <script>
-import niceModal from '@/components/components/niceModal'
+//import niceModal from '@/components/components/niceModal'
 
 export default {
     name:'welcome',
     components:{
-        niceModal
+  //      niceModal
     },
     data(){
         return {

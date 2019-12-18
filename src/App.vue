@@ -2,7 +2,7 @@
 <div>
 <nav class="navbar is-dark" role="navigation" aria-label="main navigation">
   <div class="navbar-brand ">
-    <a class="navbar-item" href="https://www.impact-lab.tools" title="zurück">
+    <a class="navbar-item" :href='domain' title="zurück">
       <span class="icon has-text-light">
         <i class="fas fa-home" aria-hidden="true" ></i>
       </span>
@@ -36,8 +36,14 @@
 
 export default {
   name: 'app',
- 
-
+ computed: {
+     domain: function(){
+       var host = "https://www.impact-lab.tools/";
+       var tkn = this.$api.cfg.user_token;
+       return host + tkn + "/tool_view";
+     }
+   
+ }
 }
 </script>
 
