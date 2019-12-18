@@ -76,14 +76,21 @@ export default {
   },
   methods: {
       doTour: async function(){
-        var hasLoggedIn = await this.$api.db.login.get({
+          if(!this.$cookies.isKey('toured')){
+            var hasLoggedIn = await this.$api.db.login.get({
              "userid": parseInt(this.$api.usr.id)
-        },this.$tkn);
-        if(hasLoggedIn.data.length > 1){
-            return false;
+            },this.$tkn);
+            if(hasLoggedIn.data.length < 1){
+                return true;
+            }else{
+                return false;
+            }
         }else{
-            return true;
+            return false;
         }
+      },
+      cancelTour: function(){
+          this.$cookies.set('toured',true);
       }
   }
 }

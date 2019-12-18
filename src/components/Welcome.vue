@@ -31,7 +31,7 @@
             </div>
         </div>
         <div class="column info-row">
-            <p><i>v0.5.4</i> - created with <b>❤︎</b> </p>
+            <p><i>v0.5.6</i> - created with <b>❤︎</b> </p>
         </div>
     </div>
 
@@ -56,6 +56,7 @@ export default {
         text: String
     },
     mounted: function(){
+        this.$cookies.remove('login');
         (this.$api.usr === 'undefined') ? this.$refs.loginPanel.appendChild(this.$api.uiModal) : {};
 
     },
@@ -65,30 +66,39 @@ export default {
             this.$refs.infoModal.toggleVisibility(); 
         },
         enter: function(){
-            window.devNoteRead = false;
             this.$router.push({path:'/q'});
         },
         trackLogin: async function(){
-            var today = new Date();
-            var date  = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-            var time = today.getHours() + ("0" + today.getMinutes()).slice(-2);
-
-            var submission = await this.$api.db.login.insert({
-                "userid":this.$api.usr.id,
-                "date": date,
-                "time": time,
-            },this.$tkn);
-    
-            if(submission.response === "transmission accepted"){
+            if(this.$cookies.isKey('login')){
+                //eslint-disable-next-line
+                console.log("no login tracked");
                 this.enter();
             }else{
-                this.$toast.open({
-                        duration: 5000,
-                        message: `Beim Anmelden ist etwas schief gelaufen, probier es bitte erneut!.`,
-                        position: 'is-bottom',
-                        type: 'is-danger'
-                    })
+                var today = new Date();
+                var date  = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+                var time = today.getHours() + ("0" + today.getMinutes()).slice(-2);
+
+                var submission = await this.$api.db.login.insert({
+                    "userid":this.$api.usr.id,
+                    "date": date,
+                    "time": time,
+                },this.$tkn);
+    
+                if(submission.response === "transmission accepted"){
+                    //eslint-disable-next-line
+                    console.log("login tracked");
+                    this.$cookies.set('login',true,'60s');
+                    this.enter();
+                }else{
+                    this.$toast.open({
+                            duration: 5000,
+                            message: `Beim Anmelden ist etwas schief gelaufen, probier es bitte erneut!.`,
+                            position: 'is-bottom',
+                            type: 'is-danger'
+                        })
+                }
             }
+            
         }
     }
 }

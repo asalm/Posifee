@@ -60,8 +60,7 @@ export default {
         submit: async function(){
             if(this.inputText.length > 10){
                 // eslint-disable-next-line
-                
-                console.log("text contains " + this.inputText.length + " characters");
+                //console.log("text contains " + this.inputText.length + " characters");
                 var today = new Date();
                 var currentDate = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
                 var submission = await this.$api.db.feedback.insert({

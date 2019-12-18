@@ -6,14 +6,16 @@
 
         <div class="columns is-mobile">
         <div class="column is-half is-offset-one-quarter">
+            <div v-for="d in devnote" :key="d.id">
               <div class="is-divider"></div>
-            {{devnote}}
+                {{d.text}}
              <div class="is-divider"></div>
-  </div>
+            </div>
+        </div>
 </div>
         
  
-        <button class="button is-success is-outlined" @click="toggle()">Schließen</button>
+        <button class="button is-success is-outlined" @click="close()">Schließen</button>
 
     </div>
   </div>
@@ -25,7 +27,7 @@ export default {
     data: function(){
         return{
             visible: false,
-            devnote: "",
+            devnote: [],
             noscroll_var: false
         }
     },
@@ -34,9 +36,12 @@ export default {
         var that = this;
         this.getData().then(function(){
             if(that.devnote.length > 0){
-                // eslint-disable-next-line no-console
-                console.log("data found!");
-            that.toggle();
+                if(!that.$cookies.isKey('visited')){
+                    that.open();
+                }else{
+                    //eslint-disable-next-line no-console
+                    console.log("already seen");
+                }
             }else{
                 // eslint-disable-next-line no-console
                 console.log("no data found");
@@ -46,18 +51,21 @@ export default {
     },
     methods:{
         getData: async function(){
-            var _response = await this.$api.db.dev_note.get({
-                    //"userid":this.$api.usr.id
-            },this.$tkn);
-            this.devnote = _response.data[0].text.toString()
+            var _response = await this.$api.db.dev_note.get({},this.$tkn);
+
+            var d = _response.data.reverse();
+            for(var i = 0; i < d.length; i++){
+                this.devnote.push({text:d[i].text.toString(),id:parseInt(d[i].id)});
+            }
         },
-        toggle: function(){
-            if(!window._devNote){
+        open: function(){
             this.visible = !this.visible;
             this.noscroll();
-            if(!this.visible){
-                window._devNote = true;
-            }}
+        },
+        close: function(){
+            this.visible = false;
+            this.noscroll();
+            this.$cookies.set('visited',true,"1d");
         },
         noscroll: function(){
             if(this.noscroll_var){

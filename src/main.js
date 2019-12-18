@@ -1,18 +1,21 @@
 import Vue from 'vue';
 import App from './App.vue';
+import router from './router';
+
+//npm packages
 import Buefy from 'buefy';
 import VueModalTor from 'vue-modaltor';
 import VDragged from 'v-dragged';
 import UniqueId from 'vue-unique-id';
 import vuescroll from 'vuescroll';
-import router from './router';
 import VueTour from 'vue-tour';
-require('vue-tour/dist/vue-tour.css');
+import VueCookies from 'vue-cookies'
 
+//styles
+require('vue-tour/dist/vue-tour.css');
 import './../node_modules/bulma/css/bulma.css';
 import './../node_modules/bulma-divider/dist/css/bulma-divider.min.css';
 import 'buefy/dist/buefy.css';
-
 import {library} from '@fortawesome/fontawesome-svg-core';
 import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome';
 
@@ -24,9 +27,9 @@ library.add(faReply,faArrowLeft);
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 Vue.config.productionTip = false
 
+//tell Vue to use stuff!
 Vue.use(vuescroll, {
   ops: {
-    // The global config
   },
   name: 'myScroll' // customize component name, default -> vueScroll
 });
@@ -35,6 +38,9 @@ Vue.use(VueModalTor);
 Vue.use(VDragged);
 Vue.use(UniqueId);
 Vue.use(VueTour);
+Vue.use(VueCookies)
+
+Vue.$cookies.config('7d');
 
 router.replace('/login');
 

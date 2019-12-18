@@ -38,6 +38,7 @@ export default {
         }
     },
     methods: {
+        // eslint-disable-next-line no-unused-vars
         onDragged({ el, deltaX, deltaY, offsetX, offsetY, clientX, clientY, first, last }) {
             if (first) {
                 this.dragged = true

@@ -63,15 +63,13 @@ export default {
       this.$router.push({name:'writequestion'});
     },
     checkUserStatus: async function(){
-      if(window._devNote){
+      if(this.$cookies.isKey('visited')){
         this.devNoteRead = true;
       }
       var _response = await this.$api.db.question.get({
         "userid": parseInt(this.$api.usr.id)
       },this.$tkn);
       var q = _response.data;
-      // eslint-disable-next-line no-console
-      console.log("q",q.length);
       if (q.length > 0){
         this.firstUse = false;
       }else{
@@ -97,7 +95,6 @@ export default {
       this.loading = false;
     },
     noscroll: function(){
-      //console.log("noscroll triggered");
       if(this.noscroll_var){
                 document.getElementById("timeline").setAttribute('style','overflowY = visible !important');
                 this.noscroll_var = false
